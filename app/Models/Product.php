@@ -20,4 +20,14 @@ class Product extends Model
     {
         return $this->hasOne(Inventory::class);
     }
+
+    /**
+     * すべての商品情報を返す
+     *
+     * @return Collection
+     */
+    public function getAll()
+    {
+        return Product::all();
+    }
 }
