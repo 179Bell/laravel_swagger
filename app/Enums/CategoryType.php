@@ -14,7 +14,7 @@ final class CategoryType extends Enum implements LocalizedEnum
 {
     const VEGETABLE = 1;
     const FISH = 2;
-    const CLOTH = 3;
-    const TOOL = 4;
-    const APPLIANCE = 5;
+    const RICE = 3;
+    const BEEF = 4;
+    const CHICKEN = 5;
 }
