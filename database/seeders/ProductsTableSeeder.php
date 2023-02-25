@@ -16,7 +16,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        Product::create(
+        $params = [
             [
                 'product_name'   => 'ブロッコリー',
                 'product_origin' => '北海道',
@@ -52,6 +52,8 @@ class ProductsTableSeeder extends Seeder
                 'category_id'    => CategoryType::getValue('CHICKEN'),
                 'price'          => '1980'
             ]
-        );
+        ];
+
+        Product::insert($params);
     }
 }

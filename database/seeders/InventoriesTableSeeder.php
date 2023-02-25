@@ -15,7 +15,7 @@ class InventoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Inventory::create(
+        $params = [
             [
                 'quantity'   => 20,
                 'product_id' => 1
@@ -36,6 +36,8 @@ class InventoriesTableSeeder extends Seeder
                 'quantity'   => 20,
                 'product_id' => 5
             ]
-        );
+        ];
+
+        Inventory::insert($params);
     }
 }
