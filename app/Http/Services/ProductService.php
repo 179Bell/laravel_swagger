@@ -23,4 +23,15 @@ class ProductService
     {
         return $this->product->getAll();
     }
+
+    /**
+     * 商品IDから商品情報を取得する
+     *
+     * @param string $id 商品ID
+     * @return Collection
+     */
+    public function getProductById($id): Collection
+    {
+        return $this->product->getProductById($id);
+    }
 }

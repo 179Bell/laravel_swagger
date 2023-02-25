@@ -63,6 +63,81 @@
                     }
                 }
             }
+        },
+        "/api/product?id=1": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "商品IDから商品情報を取得する",
+                "operationId": "e7dec461746d277a870c1676baa0e606",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "商品ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "商品情報ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "product_name": {
+                                            "description": "製品名",
+                                            "type": "string",
+                                            "example": "ブロッコリー"
+                                        },
+                                        "product_origin": {
+                                            "description": "生産地",
+                                            "type": "string",
+                                            "example": "北海道"
+                                        },
+                                        "category_id": {
+                                            "description": "カテゴリーID",
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "price": {
+                                            "description": "価格",
+                                            "type": "string",
+                                            "example": "100"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

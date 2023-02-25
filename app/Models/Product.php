@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Inventory;
+use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
 {
@@ -26,8 +27,19 @@ class Product extends Model
      *
      * @return Collection
      */
-    public function getAll()
+    public function getAll(): Collection
     {
         return Product::all();
+    }
+
+    /**
+     * 商品IDから商品情報を取得する
+     *
+     * @param string $id 商品ID
+     * @return Collection
+     */
+    public function getProductById($id): Collection
+    {
+        return Product::where('id', $id)->get();
     }
 }
