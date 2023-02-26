@@ -42,4 +42,9 @@ class Product extends Model
     {
         return Product::where('id', $id)->get();
     }
+
+    public function getAllProductInventory(): Collection
+    {
+        return Product::join('inventories', 'products.id', '=', 'inventories.product_id')->get();
+    }
 }

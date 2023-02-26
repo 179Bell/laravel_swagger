@@ -139,6 +139,64 @@
                 }
             }
         },
+        "/api/allInventory": {
+            "get": {
+                "tags": [
+                    "inventory"
+                ],
+                "summary": "すべての製品の在庫情を取得する",
+                "operationId": "dacbd82950db160e3b27ce1509d174a0",
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "商品情報ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "product_name": {
+                                            "description": "製品名",
+                                            "type": "string",
+                                            "example": "ブロッコリー"
+                                        },
+                                        "product_origin": {
+                                            "description": "生産地",
+                                            "type": "string",
+                                            "example": "北海道"
+                                        },
+                                        "category_id": {
+                                            "description": "カテゴリーID",
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "price": {
+                                            "description": "価格",
+                                            "type": "string",
+                                            "example": "100"
+                                        },
+                                        "category": {
+                                            "description": "カテゴリー",
+                                            "type": "string",
+                                            "example": "野菜類"
+                                        },
+                                        "quantity": {
+                                            "description": "在庫量",
+                                            "type": "string",
+                                            "example": "20"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/allProduct": {
             "get": {
                 "tags": [
