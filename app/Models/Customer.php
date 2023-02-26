@@ -19,4 +19,15 @@ class Customer extends Model
     {
         return Customer::all();
     }
+
+    /**
+     * 顧客IDから顧客情報を取得する
+     *
+     * @param string $id 顧客ID
+     * @return Collection
+     */
+    public function getCustomerById(string $id): Collection
+    {
+        return Customer::where('id', $id)->get();
+    }
 }

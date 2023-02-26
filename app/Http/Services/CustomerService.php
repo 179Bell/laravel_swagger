@@ -23,4 +23,15 @@ class CustomerService
     {
         return $this->customer->getAll();
     }
+
+    /**
+     * 顧客IDから顧客情報を検索する
+     *
+     * @param string $id 顧客ID
+     * @return Collection
+     */
+    public function getCustomerById(string $id): Collection
+    {
+        return $this->customer->getCustomerById($id);
+    }
 }
