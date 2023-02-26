@@ -6,6 +6,64 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/customer": {
+            "get": {
+                "tags": [
+                    "customer"
+                ],
+                "summary": "すべての顧客情報を取得する",
+                "operationId": "22627fdef91f0add31d24614e551569b",
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "顧客ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "prefecture": {
+                                            "description": "都道府県",
+                                            "type": "string",
+                                            "example": "茨城県"
+                                        },
+                                        "city": {
+                                            "description": "市町村名",
+                                            "type": "string",
+                                            "example": "中島市"
+                                        },
+                                        "address": {
+                                            "description": "市町村以降の住所",
+                                            "type": "string",
+                                            "example": "若松町村山1-2-3"
+                                        },
+                                        "customer_name": {
+                                            "description": "顧客名",
+                                            "type": "string",
+                                            "example": "山田太郎"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/allProduct": {
             "get": {
                 "tags": [
