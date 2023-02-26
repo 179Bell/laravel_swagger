@@ -29,7 +29,7 @@ class Product extends Model
      */
     public function getAll(): Collection
     {
-        return Product::all();
+        return Product::join('inventories', 'products.id', '=', 'inventories.product_id')->get();
     }
 
     /**
@@ -40,11 +40,8 @@ class Product extends Model
      */
     public function getProductById($id): Collection
     {
-        return Product::where('id', $id)->get();
-    }
-
-    public function getAllProductInventory(): Collection
-    {
-        return Product::join('inventories', 'products.id', '=', 'inventories.product_id')->get();
+        return Product::join('inventories', 'products.id', '=', 'inventories.product_id')
+                ->where('products.id', $id)
+                ->get();
     }
 }

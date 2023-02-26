@@ -24,7 +24,7 @@ class ProductController extends Controller
      * @OA\Get(
      *     path="/api/allProduct",
      *     tags={"product"},
-     *     summary="すべての商品情報を取得する",
+     *     summary="すべての商品情報と在庫情報を取得する",
      *     @OA\Response(
      *          response="200",
      *          description="成功時のレスポンス",
@@ -36,6 +36,7 @@ class ProductController extends Controller
      *              @OA\Property(property="price", type="string", description="価格", example="100"),
      *              @OA\Property(property="created_at", type="string", description="作成日時", example="2023-02-23T10:33:28.000000Z"),
      *              @OA\Property(property="updated_at", type="string", description="更新日時", example="2023-02-23T10:33:28.000000Z"),
+     *              @OA\Property(property="quantity", type="string", description="在庫量", example="20"),
      *          )
      *      )
      * )
@@ -53,7 +54,7 @@ class ProductController extends Controller
      * @OA\Get(
      *     path="/api/product?id=1",
      *     tags={"product"},
-     *     summary="商品IDから商品情報を取得する",
+     *     summary="商品IDから商品情報と在庫情報を取得する",
      *     @OA\Parameter(
      *         description="商品ID",
      *         in="path",
@@ -73,6 +74,7 @@ class ProductController extends Controller
      *              @OA\Property(property="price", type="string", description="価格", example="100"),
      *              @OA\Property(property="created_at", type="string", description="作成日時", example="2023-02-23T10:33:28.000000Z"),
      *              @OA\Property(property="updated_at", type="string", description="更新日時", example="2023-02-23T10:33:28.000000Z"),
+     *              @OA\Property(property="quantity", type="string", description="在庫量", example="20"),
      *          )
      *      )
      * )

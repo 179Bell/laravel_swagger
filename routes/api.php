@@ -25,4 +25,3 @@ Route::get('/allProduct', [ProductController::class, 'getAllProducts']);
 Route::get('/product', [ProductController::class, 'getProductById']);
 Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
 Route::get('/customer', [CustomerController::class, 'getCustomer']);
-Route::get('/allInventory', [InventoryController::class, 'getAllInventories']);
