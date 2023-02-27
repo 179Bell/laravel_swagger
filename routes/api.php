@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -25,3 +26,4 @@ Route::get('/allProduct', [ProductController::class, 'getAllProducts']);
 Route::get('/product', [ProductController::class, 'getProductById']);
 Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
 Route::get('/customer', [CustomerController::class, 'getCustomer']);
+Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
