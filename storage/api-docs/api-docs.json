@@ -139,6 +139,166 @@
                 }
             }
         },
+        "/api/allDelivery": {
+            "get": {
+                "tags": [
+                    "delivery"
+                ],
+                "summary": "すべての注文情報を取得する",
+                "operationId": "0c7487d5c84aa6686cc53860b34dda44",
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "注文ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "delivery_date": {
+                                            "description": "注文日",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2015-07-28"
+                                        },
+                                        "quantity": {
+                                            "description": "注文量",
+                                            "type": "string",
+                                            "example": "20"
+                                        },
+                                        "product_id": {
+                                            "description": "商品ID",
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "customer_id": {
+                                            "description": "顧客ID",
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "is_delivered": {
+                                            "description": "出荷フラグ",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/delivery": {
+            "get": {
+                "tags": [
+                    "delivery"
+                ],
+                "summary": "注文IDから注文情報を取得する",
+                "operationId": "f4d29ee591339b804973313d1345d15a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "注文ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "注文ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "delivery_date": {
+                                            "description": "注文日",
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2015-07-28"
+                                        },
+                                        "quantity": {
+                                            "description": "注文量",
+                                            "type": "string",
+                                            "example": "20"
+                                        },
+                                        "product_name": {
+                                            "description": "商品名",
+                                            "type": "string",
+                                            "example": "ブロッコリー"
+                                        },
+                                        "prefecture": {
+                                            "description": "都道府県",
+                                            "type": "string",
+                                            "example": "愛知県"
+                                        },
+                                        "city": {
+                                            "description": "市町村",
+                                            "type": "string",
+                                            "example": "名古屋市"
+                                        },
+                                        "address": {
+                                            "description": "住所",
+                                            "type": "string",
+                                            "example": "千種区光ケ丘"
+                                        },
+                                        "customer_name": {
+                                            "description": "顧客名",
+                                            "type": "string",
+                                            "example": "山田太郎"
+                                        },
+                                        "is_delivered": {
+                                            "description": "出荷フラグ",
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/allProduct": {
             "get": {
                 "tags": [
