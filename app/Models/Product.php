@@ -12,6 +12,14 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'product_name',
+        'product_origin',
+        'description',
+        'category_id',
+        'price'
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -43,5 +51,10 @@ class Product extends Model
         return Product::join('inventories', 'products.id', '=', 'inventories.product_id')
                 ->where('products.id', $id)
                 ->get();
+    }
+
+    public function createProduct(array $data)
+    {
+        return Product::create($data);
     }
 }

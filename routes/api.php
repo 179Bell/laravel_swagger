@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
-use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/allProduct', [ProductController::class, 'getAllProducts']);
 Route::get('/product', [ProductController::class, 'getProductById']);
+Route::post('/product', [ProductController::class, 'createProduct']);
 Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
 Route::get('/customer', [CustomerController::class, 'getCustomer']);
 Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);

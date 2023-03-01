@@ -441,6 +441,78 @@
                     }
                 }
             }
+        },
+        "/api/createProduct": {
+            "post": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "商品情報を新規登録する",
+                "operationId": "7839b5d40eddc2a17dc26bab81e0f4f7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_name",
+                                    "product_origin",
+                                    "description",
+                                    "category_id",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "product_name": {
+                                        "description": "商品名",
+                                        "type": "string",
+                                        "example": "牡蠣"
+                                    },
+                                    "product_origin": {
+                                        "description": "生産地",
+                                        "type": "string",
+                                        "example": "広島県"
+                                    },
+                                    "description": {
+                                        "description": "商品の説明",
+                                        "type": "string",
+                                        "example": "江田島産牡蠣"
+                                    },
+                                    "category_id": {
+                                        "description": "商品カテゴリー",
+                                        "type": "string",
+                                        "example": "3"
+                                    },
+                                    "price": {
+                                        "description": "価格",
+                                        "type": "string",
+                                        "example": "30"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

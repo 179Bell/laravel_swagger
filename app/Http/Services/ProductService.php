@@ -34,4 +34,9 @@ class ProductService
     {
         return $this->product->getProductById($id);
     }
+
+    public function createProduct(array $data)
+    {
+        return $this->product->createProduct($data);
+    }
 }
