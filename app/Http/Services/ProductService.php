@@ -39,4 +39,9 @@ class ProductService
     {
         return $this->product->createProduct($data);
     }
+
+    public function updateProduct(array $data)
+    {
+        return $this->product->updateProduct($data);
+    }
 }

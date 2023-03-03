@@ -480,12 +480,12 @@
                                     "category_id": {
                                         "description": "商品カテゴリー",
                                         "type": "string",
-                                        "example": "3"
+                                        "example": "牡蠣"
                                     },
                                     "price": {
                                         "description": "価格",
                                         "type": "string",
-                                        "example": "30"
+                                        "example": "100"
                                     }
                                 },
                                 "type": "object"
@@ -494,7 +494,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "成功時のレスポンス",
                         "content": {
                             "application/json": {
@@ -504,6 +504,152 @@
                                             "description": "成功時のメッセージ",
                                             "type": "string",
                                             "example": "商品情報の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品名は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の新規登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/updateProduct": {
+            "post": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "商品情報を更新する",
+                "operationId": "478194fb5af3d7750887deab734918d5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "product_name",
+                                    "product_origin",
+                                    "description",
+                                    "category_id",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "product_name": {
+                                        "description": "商品名",
+                                        "type": "string",
+                                        "example": "牡蠣"
+                                    },
+                                    "product_origin": {
+                                        "description": "生産地",
+                                        "type": "string",
+                                        "example": "広島県"
+                                    },
+                                    "description": {
+                                        "description": "商品の説明",
+                                        "type": "string",
+                                        "example": "江田島産牡蠣"
+                                    },
+                                    "category_id": {
+                                        "description": "商品カテゴリー",
+                                        "type": "string",
+                                        "example": "牡蠣"
+                                    },
+                                    "price": {
+                                        "description": "価格",
+                                        "type": "string",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の更新に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品名は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の更新に失敗しました"
                                         }
                                     },
                                     "type": "object"

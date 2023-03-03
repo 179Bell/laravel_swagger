@@ -105,78 +105,57 @@ class ProductController extends Controller
      *          @OA\JsonContent(
      *              type="object",
      *              required={"product_name","product_origin","description","category_id","price"},
-     *                   @OA\Propery(
+     *                   @OA\Property(
      *                      property="product_name",
      *                      type="string",
      *                      description="商品名",
-     *                      example="牡蠣"
+     *                      example="牡蠣",
      *                     ),
-     *                   @OA\Propery(
+     *                   @OA\Property(
      *                      property="product_origin",
      *                      type="string",
      *                      description="生産地",
-     *                      example="広島県"
+     *                      example="広島県",
      *                     ),
-     *                   @OA\Propery(
+     *                   @OA\Property(
      *                      property="description",
      *                      type="string",
      *                      description="商品の説明",
-     *                      example="江田島産牡蠣"
+     *                      example="江田島産牡蠣",
      *                     ),
-     *                   @OA\Propery(
+     *                   @OA\Property(
      *                      property="category_id",
      *                      type="string",
      *                      description="商品カテゴリー",
-     *                      example="牡蠣"
+     *                      example="牡蠣",
      *                     ),
-     *                   @OA\Propery(
+     *                   @OA\Property(
      *                      property="price",
      *                      type="string",
      *                      description="価格",
-     *                      example=""
+     *                      example="100",
      *                     ),
      *            )
-     *     )
-     *     @OA\Parameter(
-     *         description="商品名",
-     *         name="product_name",
-     *         required=true,
-     *         @OA\Schema(type="string"),
-     *         @OA\Examples(example="string", value="牡蠣"),
-     *      ),
-     *     @OA\Parameter(
-     *         description="生産地",
-     *         name="product_origin",
-     *         required=true,
-     *         @OA\Schema(type="string"),
-     *         @OA\Examples(example="string", value="広島県"),
-     *      ),
-     *     @OA\Parameter(
-     *         description="商品の説明",
-     *         name="description",
-     *         required=true,
-     *         @OA\Schema(type="string"),
-     *         @OA\Examples(example="string", value="江田島産の牡蠣です"),
-     *      ),
-     *     @OA\Parameter(
-     *         description="カテゴリーID",
-     *         name="category_id",
-     *         required=true,
-     *         @OA\Schema(type="string"),
-     *         @OA\Examples(example="string", value="3"),
-     *      ),
-     *     @OA\Parameter(
-     *         description="商品価格",
-     *         name="price",
-     *         required=true,
-     *         @OA\Schema(type="string"),
-     *         @OA\Examples(example="string", value="300"),
-     *      ),
+     *     ),
      *     @OA\Response(
-     *          response="200",
+     *          response="201",
      *          description="成功時のレスポンス",
      *          @OA\JsonContent(
      *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="商品情報の新規登録に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="商品名は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="商品情報の新規登録に失敗しました"),
      *          )
      *      )
      * )
@@ -196,5 +175,93 @@ class ProductController extends Controller
         }
 
         return response()->json('商品情報の新規登録に成功しました', 201);
+    }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/updateProduct",
+     *     tags={"product"},
+     *     summary="商品情報を更新する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id","product_name","product_origin","description","category_id","price"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="string",
+     *                      description="商品ID",
+     *                      example="1",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="product_name",
+     *                      type="string",
+     *                      description="商品名",
+     *                      example="牡蠣",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="product_origin",
+     *                      type="string",
+     *                      description="生産地",
+     *                      example="広島県",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="description",
+     *                      type="string",
+     *                      description="商品の説明",
+     *                      example="江田島産牡蠣",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="category_id",
+     *                      type="string",
+     *                      description="商品カテゴリー",
+     *                      example="牡蠣",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="price",
+     *                      type="string",
+     *                      description="価格",
+     *                      example="100",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="商品情報の更新に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="商品名は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="商品情報の更新に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 商品情報を更新する
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateProduct(Request $request): JsonResponse
+    {
+        $data = $request->only(['id', 'product_name', 'product_origin', 'description', 'category_id', 'price']);
+
+        $result = $this->productService->updateProduct($data);
+
+        if ($result === self::FAILED) {
+            return response()->json('商品情報の更新に失敗しました', 500);
+        }
+
+        return response()->json('商品情報の更新に成功しました', 201);
     }
 }

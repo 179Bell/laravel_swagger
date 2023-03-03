@@ -53,8 +53,22 @@ class Product extends Model
                 ->get();
     }
 
-    public function createProduct(array $data)
+    /**
+     * 商品情報を新規作成する
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function createProduct(array $data): bool
     {
         return Product::create($data);
+    }
+
+    public function updateProduct(array $data): bool
+    {
+        $product = Product::find($data['id']);
+
+        $product->fill($data);
+        return $product->save();
     }
 }
