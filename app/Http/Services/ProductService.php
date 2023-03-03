@@ -40,8 +40,25 @@ class ProductService
         return $this->product->createProduct($data);
     }
 
-    public function updateProduct(array $data)
+    /**
+     * 商品情報を更新する
+     *
+     * @param $data
+     * @return boolean
+     */
+    public function updateProduct(array $data): bool
     {
         return $this->product->updateProduct($data);
+    }
+
+    /**
+     * 商品情報を削除する
+     *
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteProduct(string $id): bool
+    {
+        return $this->product->deleteProduct($id);
     }
 }

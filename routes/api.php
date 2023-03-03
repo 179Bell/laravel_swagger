@@ -29,3 +29,4 @@ Route::get('/customer', [CustomerController::class, 'getCustomer']);
 Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
 Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
 Route::post('/updateProduct', [ProductController::class, 'updateProduct']);
+Route::post('/deleteProduct', [ProductController::class, 'deleteProduct']);

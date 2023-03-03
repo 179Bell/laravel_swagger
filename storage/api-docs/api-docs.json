@@ -659,6 +659,76 @@
                     }
                 }
             }
+        },
+        "/api/deleteProduct": {
+            "post": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "商品情報を削除する",
+                "operationId": "14fb13bf05cd2dbe2910fed4ba79b287",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "product_name",
+                                    "product_origin",
+                                    "description",
+                                    "category_id",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の削除に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の削除に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

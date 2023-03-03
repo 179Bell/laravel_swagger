@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ProductResource;
 use App\Http\Services\ProductService;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\ProductRequest as Request;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -164,7 +165,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function createProduct(Request $request): JsonResponse
+    public function createProduct(ProductRequest $request): JsonResponse
     {
         $data = $request->only(['product_name', 'product_origin', 'description', 'category_id', 'price']);
 
@@ -252,7 +253,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function updateProduct(Request $request): JsonResponse
+    public function updateProduct(ProductRequest $request): JsonResponse
     {
         $data = $request->only(['id', 'product_name', 'product_origin', 'description', 'category_id', 'price']);
 
@@ -263,5 +264,56 @@ class ProductController extends Controller
         }
 
         return response()->json('商品情報の更新に成功しました', 201);
+    }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/deleteProduct",
+     *     tags={"product"},
+     *     summary="商品情報を削除する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id","product_name","product_origin","description","category_id","price"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="string",
+     *                      description="商品ID",
+     *                      example="1",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="商品情報の削除に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="商品情報の削除に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 商品情報を削除する
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteProduct(Request $request): JsonResponse
+    {
+        $request = $request->only(['id']);
+
+        $result = $this->productService->deleteProduct($request['id']);
+
+        if ($result === self::FAILED) {
+            return response()->json('商品情報の削除に失敗しました', 500);
+        }
+
+        return response()->json('商品情報の削除に成功しました', 201);
     }
 }

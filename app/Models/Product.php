@@ -64,11 +64,28 @@ class Product extends Model
         return Product::create($data);
     }
 
+    /**
+     * 商品情報を更新する
+     *
+     * @param array $data
+     * @return boolean
+     */
     public function updateProduct(array $data): bool
     {
         $product = Product::find($data['id']);
 
         $product->fill($data);
         return $product->save();
+    }
+
+    /**
+     * 商品情報を削除する
+     *
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteProduct(string $id): bool
+    {
+        return Product::find($id)->delete();
     }
 }
