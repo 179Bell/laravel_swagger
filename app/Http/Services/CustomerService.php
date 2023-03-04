@@ -34,4 +34,15 @@ class CustomerService
     {
         return $this->customer->getCustomerById($id);
     }
+
+    /**
+     * 顧客情報を新規作成する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function createCustomer(array $attributes): bool
+    {
+        return $this->customer->createCustomer($attributes);
+    }
 }

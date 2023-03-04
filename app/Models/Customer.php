@@ -10,6 +10,13 @@ class Customer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'prefecture',
+        'city',
+        'address',
+        'customer_name',
+    ];
+
     /**
      * すべての顧客情報を取得する
      *
@@ -29,5 +36,16 @@ class Customer extends Model
     public function getCustomerById(string $id): Collection
     {
         return Customer::where('id', $id)->get();
+    }
+
+    /**
+     * 顧客情報を新規作成する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function createCustomer(array $attributes): bool
+    {
+        return Customer::fill($attributes)->save();
     }
 }

@@ -139,6 +139,106 @@
                 }
             }
         },
+        "/api/createCustomer": {
+            "post": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "顧客情報を新規登録する",
+                "operationId": "136e24b3fffca880cb7f407c1b1c4f1d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "prefecture",
+                                    "city",
+                                    "address",
+                                    "customer_name"
+                                ],
+                                "properties": {
+                                    "prefecture": {
+                                        "description": "都道府県",
+                                        "type": "string",
+                                        "example": "愛知県"
+                                    },
+                                    "city": {
+                                        "description": "市町村名",
+                                        "type": "string",
+                                        "example": "名古屋市"
+                                    },
+                                    "address": {
+                                        "description": "住所",
+                                        "type": "string",
+                                        "example": "千種区光ケ丘"
+                                    },
+                                    "customer_name": {
+                                        "description": "顧客名",
+                                        "type": "string",
+                                        "example": "山田太郎"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "顧客情報の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "都道府県は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "顧客情報の新規登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/allDelivery": {
             "get": {
                 "tags": [

@@ -21,12 +21,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// 商品情報
 Route::get('/allProduct', [ProductController::class, 'getAllProducts']);
 Route::get('/product', [ProductController::class, 'getProductById']);
 Route::post('/product', [ProductController::class, 'createProduct']);
-Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
-Route::get('/customer', [CustomerController::class, 'getCustomer']);
-Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
-Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
 Route::post('/updateProduct', [ProductController::class, 'updateProduct']);
 Route::post('/deleteProduct', [ProductController::class, 'deleteProduct']);
+// 顧客情報
+Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
+Route::get('/customer', [CustomerController::class, 'getCustomer']);
+Route::post('createCustomer', [CustomerController::class, 'createCustomer']);
+// 出荷
+Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
+Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);

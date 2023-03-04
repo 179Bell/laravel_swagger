@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CustomerResource;
 use App\Http\Services\CustomerService;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
+use Illuminate\Http\JsonResponse;
 
 class CustomerController extends Controller
 {
+    private const FAILED = 0;
+
     public function __construct(CustomerService $service)
     {
         $this->service = $service;
@@ -79,5 +83,80 @@ class CustomerController extends Controller
         $id = $request->query('id');
         $customer = $this->service->getCustomerById($id);
         return new CustomerResource($customer);
+    }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/createCustomer",
+     *     tags={"product"},
+     *     summary="顧客情報を新規登録する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"prefecture","city","address","customer_name"},
+     *                   @OA\Property(
+     *                      property="prefecture",
+     *                      type="string",
+     *                      description="都道府県",
+     *                      example="愛知県",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="city",
+     *                      type="string",
+     *                      description="市町村名",
+     *                      example="名古屋市",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="address",
+     *                      type="string",
+     *                      description="住所",
+     *                      example="千種区光ケ丘",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="customer_name",
+     *                      type="string",
+     *                      description="顧客名",
+     *                      example="山田太郎",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="顧客情報の新規登録に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="都道府県は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="顧客情報の新規登録に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 顧客情報を新規作成してJSONレスポンスを返す
+     *
+     * @param CustomerRequest $request
+     * @return JsonResponse
+     */
+    public function createCustomer(CustomerRequest $request): JsonResponse
+    {
+        $attributes = $request->only(['prefecture', 'city', 'address', 'customer_name']);
+        $result = $this->service->createCustomer($attributes);
+
+        if ($result === self::FAILED) {
+            return response()->json('顧客情報の新規登録に失敗しました', 500);
+        }
+
+        return response()->json('顧客情報の新規登録に成功しました', 201);
     }
 }
