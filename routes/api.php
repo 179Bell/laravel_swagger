@@ -31,6 +31,7 @@ Route::post('/deleteProduct', [ProductController::class, 'deleteProduct']);
 Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
 Route::get('/customer', [CustomerController::class, 'getCustomer']);
 Route::post('createCustomer', [CustomerController::class, 'createCustomer']);
+Route::post('/updateCustomer', [CustomerController::class, 'updateCustomer']);
 // 出荷
 Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
 Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);

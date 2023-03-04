@@ -159,6 +159,10 @@ return [
         'description' => '商品説明',
         'category_id' => '商品カテゴリー',
         'price' => '価格',
+        'prefecture' => '都道府県',
+        'city' => '市町村',
+        'address' => '住所',
+        'customer_name' => '名前'
     ],
 
 ];

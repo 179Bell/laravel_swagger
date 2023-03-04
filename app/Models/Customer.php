@@ -48,4 +48,16 @@ class Customer extends Model
     {
         return Customer::fill($attributes)->save();
     }
+
+    /**
+     * 顧客情報を更新する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function updateCustomer(array $attributes): bool
+    {
+        $customer = Customer::find($attributes['id']);
+        return $customer->fill($attributes)->save();
+    }
 }

@@ -45,4 +45,15 @@ class CustomerService
     {
         return $this->customer->createCustomer($attributes);
     }
+
+    /**
+     * 顧客情報を更新する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function updateCustomer(array $attributes): bool
+    {
+        return $this->customer->updateCustomer($attributes);
+    }
 }

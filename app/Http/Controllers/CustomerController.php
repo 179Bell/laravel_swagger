@@ -159,4 +159,85 @@ class CustomerController extends Controller
 
         return response()->json('顧客情報の新規登録に成功しました', 201);
     }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/updateCustomer",
+     *     tags={"product"},
+     *     summary="顧客情報を更新する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id","prefecture","city","address","customer_name"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="integer",
+     *                      description="顧客ID",
+     *                      example=1,
+     *                     ),
+     *                   @OA\Property(
+     *                      property="prefecture",
+     *                      type="string",
+     *                      description="都道府県",
+     *                      example="愛知県",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="city",
+     *                      type="string",
+     *                      description="市町村名",
+     *                      example="名古屋市",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="address",
+     *                      type="string",
+     *                      description="住所",
+     *                      example="千種区光ケ丘",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="customer_name",
+     *                      type="string",
+     *                      description="顧客名",
+     *                      example="山田太郎",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="顧客情報の更新に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="都道府県は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="顧客情報の更新に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 顧客情報を更新してJSONレスポンスを返す
+     *
+     * @param CustomerRequest $request
+     * @return JsonResponse
+     */
+    public function updateCustomer(CustomerRequest $request): JsonResponse
+    {
+        $attributes = $request->only(['id', 'prefecture', 'city', 'address', 'customer_name']);
+        $result = $this->service->updateCustomer($attributes);
+
+        if ($result === self::FAILED) {
+            return response()->json('顧客情報の更新に失敗しました', 500);
+        }
+
+        return response()->json('顧客情報の更新に成功しました', 201);
+    }
 }
