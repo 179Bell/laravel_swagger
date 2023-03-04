@@ -240,4 +240,54 @@ class CustomerController extends Controller
 
         return response()->json('顧客情報の更新に成功しました', 201);
     }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/deleteCustomer",
+     *     tags={"customer"},
+     *     summary="顧客情報を削除する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="string",
+     *                      description="顧客ID",
+     *                      example="1",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="顧客情報の削除に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="顧客情報の削除に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 顧客情報を削除して結果をJSONレスポンスで返す
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteCustomer(Request $request): JsonResponse
+    {
+        $attributes = $request->only(['id']);
+        $result = $this->service->deleteCustomer($attributes['id']);
+
+        if ($result === self::FAILED) {
+            return response()->json('顧客情報の削除に失敗しました', 500);
+        }
+
+        return response()->json('顧客情報の削除に成功しました', 201);
+    }
 }

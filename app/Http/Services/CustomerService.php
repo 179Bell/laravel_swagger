@@ -56,4 +56,15 @@ class CustomerService
     {
         return $this->customer->updateCustomer($attributes);
     }
+
+    /**
+     * 顧客情報を削除する
+     *
+     * @param string $id 顧客ID
+     * @return boolean
+     */
+    public function deleteCustomer(string $id): bool
+    {
+        return $this->customer->deleteCustomer($id);
+    }
 }

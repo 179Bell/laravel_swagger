@@ -60,4 +60,15 @@ class Customer extends Model
         $customer = Customer::find($attributes['id']);
         return $customer->fill($attributes)->save();
     }
+
+    /**
+     * 顧客情報を削除する
+     *
+     * @param string $id 顧客ID
+     * @return boolean
+     */
+    public function deleteCustomer(string $id): bool
+    {
+        return Customer::find($id)->delete();
+    }
 }
