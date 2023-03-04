@@ -61,7 +61,7 @@ class Product extends Model
      */
     public function createProduct(array $data): bool
     {
-        return Product::create($data);
+        return Product::fill($data)->save();
     }
 
     /**
