@@ -20,21 +20,21 @@ class DeliveriesTableSeeder extends Seeder
 
         $data = [
             [
-                'delivery_data' => $faker->date(),
+                'delivery_date' => $faker->date(),
                 'quantity'      => '5',
                 'product_id'    => '1',
                 'customer_id'   => '1',
                 'is_delivered'  => false
             ],
             [
-                'delivery_data' => $faker->date(),
+                'delivery_date' => $faker->date(),
                 'quantity'      => '5',
                 'product_id'    => '2',
                 'customer_id'   => '4',
                 'is_delivered'  => false
             ],
             [
-                'delivery_data' => $faker->date(),
+                'delivery_date' => $faker->date(),
                 'quantity'      => '5',
                 'product_id'    => '5',
                 'customer_id'   => '2',

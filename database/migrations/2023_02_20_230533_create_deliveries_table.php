@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('delivery_data')->comment('発送日');
-            $table->date('quantity')->comment('数量');
+            $table->date('delivery_date')->comment('発送日');
+            $table->string('quantity')->comment('数量');
             $table->string('product_id')->comment('商品ID');
             $table->string('customer_id')->comment('顧客ID');
-            $table->boolean('is_delivered')->comment('発送フラグ');
+            $table->boolean('is_delivered')->default(false)->comment('発送フラグ');
             $table->timestamps();
         });
     }
