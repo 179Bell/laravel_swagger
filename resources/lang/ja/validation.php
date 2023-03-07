@@ -162,7 +162,11 @@ return [
         'prefecture' => '都道府県',
         'city' => '市町村',
         'address' => '住所',
-        'customer_name' => '名前'
+        'customer_name' => '名前',
+        'customer_id' => '顧客ID',
+        'product_id' => '商品ID',
+        'quantity' => '数量',
+        'delivery_date' => '配送日',
     ],
 
 ];
