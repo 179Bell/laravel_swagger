@@ -10,6 +10,14 @@ class Delivery extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'delivery_date',
+        'quantity',
+        'product_id',
+        'customer_id',
+        'is_delivered',
+    ];
+
     /**
      * すべての注文情報を取得する
      *
@@ -32,5 +40,16 @@ class Delivery extends Model
                 ->join('customers', 'deliveries.customer_id', '=', 'customers.id')
                 ->where('deliveries.id', $id)
                 ->get();
+    }
+
+    /**
+     * 注文情報を新規登録する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function createDelivery(array $attributes): bool
+    {
+        return Delivery::fill($attributes)->save();
     }
 }

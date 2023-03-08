@@ -5,13 +5,23 @@ declare(strict_types=1);
 namespace App\Http\Services;
 
 use App\Models\Delivery;
+use App\Models\Inventory;
 use Illuminate\Support\Collection;
+
+use function PHPUnit\Framework\returnSelf;
 
 class DeliveryService
 {
-    public function __construct(Delivery $delivery)
+    private const EMPTY = '0';
+    private const STOCK_EMPTY = 2;
+    private const STOCK_SHORTAGE = 3;
+
+    public function __construct(
+        Delivery $delivery,
+        Inventory $inventory)
     {
         $this->delivery = $delivery;
+        $this->inventory = $inventory;
     }
 
     /**
@@ -48,5 +58,28 @@ class DeliveryService
         ];
 
         return collect($response);
+    }
+
+    /**
+     * 注文情報を新規作成する
+     *
+     * @param array $attributes
+     * @return boolean|integer
+     */
+    public function createDelivery(array $attributes): bool|int
+    {
+        $inventory = $this->inventory->getInventoryByProductId($attributes['product_id']);
+
+        // 【TODO】Sweaggerで複数の同じステータスコードのレスポンスの記述がわかるまで一旦コメントアウト
+        // if ($inventory[0]['quantity'] === self::EMPTY) {
+        //     return self::STOCK_EMPTY;
+        // } elseif ($inventory[0]['quantity'] < $attributes['quantity']) {
+        //     return self::STOCK_SHORTAGE;
+        // }
+
+        if ($inventory[0]['quantity'] === self::EMPTY) return false;
+        if ($inventory[0]['quantity'] < $attributes['quantity']) return false;
+
+        return $this->delivery->createDelivery($attributes);
     }
 }

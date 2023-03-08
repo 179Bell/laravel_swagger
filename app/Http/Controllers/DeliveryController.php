@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DeliveryResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\DeliveryRequest;
 use App\Http\Services\DeliveryService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DeliveryController extends Controller
 {
+    private const FAILED = 0;
+    private const STOCK_EMPTY = 2;
+    private const STOCK_SHORTAGE = 3;
+
     public function __construct(DeliveryService $service)
     {
         $this->service = $service;
@@ -83,5 +90,97 @@ class DeliveryController extends Controller
     {
         $delivery = $this->service->getDeliveryById($request->query('id'));
         return new DeliveryResource($delivery);
+    }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/createDelivery",
+     *     tags={"delivery"},
+     *     summary="注文を新規登録する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"delivery_date","quantity","customer_id","product_id"},
+     *                   @OA\Property(
+     *                      property="delivery_date",
+     *                      type="date",
+     *                      description="注文日",
+     *                      example="2023/03/07",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="quantity",
+     *                      type="string",
+     *                      description="注文量",
+     *                      example="20",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="customer_id",
+     *                      type="string",
+     *                      description="顧客ID",
+     *                      example="1",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="product_id",
+     *                      type="string",
+     *                      description="商品ID",
+     *                      example="3",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="注文の新規登録に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="数量は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="注文の登録に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 注文情報を新規作成して結果のJSONレスポンスを返す
+     *
+     * @param DeliveryRequest $request
+     * @return JsonResponse
+     */
+    public function createDelivery(DeliveryRequest $request): JsonResponse
+    {
+        $deliveries = $request->only(['delivery_date', 'quantity', 'product_id', 'customer_id', 'is_delivered']);
+        $result = $this->service->createDelivery($deliveries);
+
+        if ($result === self::FAILED) {
+            return response()->json([
+                'failedMessage' => '注文の登録に失敗しました。'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        // 【TODO】複数の500レスポンスの記述がわかるまで一旦一律同じエラーを返す
+        // if ($result === self::STOCK_EMPTY) {
+        //     return response()->json([
+        //             'stockEmptyMessage' => '選択した商品の在庫がありません'
+        //         ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        // }
+
+        // if ($result === self::STOCK_SHORTAGE) {
+        //     return response()->json([
+        //         'stockShortageMessage' => '在庫が注文量より下回っています'
+        //     ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        // }
+
+        return response()->json([
+            'successMessage' => '注文の登録に成功しました'
+        ], Response::HTTP_CREATED);
     }
 }

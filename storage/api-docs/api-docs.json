@@ -570,6 +570,107 @@
                 }
             }
         },
+        "/api/createDelivery": {
+            "post": {
+                "tags": [
+                    "delivery"
+                ],
+                "summary": "注文を新規登録する",
+                "operationId": "99134add82c3ffdb1a8ae62b3d50c562",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "delivery_date",
+                                    "quantity",
+                                    "customer_id",
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "delivery_date": {
+                                        "description": "注文日",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023/03/07"
+                                    },
+                                    "quantity": {
+                                        "description": "注文量",
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "customer_id": {
+                                        "description": "顧客ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品名は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/allProduct": {
             "get": {
                 "tags": [
