@@ -643,7 +643,7 @@
                                         "validationErrorMessage": {
                                             "description": "バリデーションエラー時のメッセージ",
                                             "type": "string",
-                                            "example": "商品名は必須です"
+                                            "example": "数量は必須です"
                                         }
                                     },
                                     "type": "object"
@@ -661,6 +661,113 @@
                                             "description": "登録失敗時のメッセージ",
                                             "type": "string",
                                             "example": "注文の登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/updateDelivery": {
+            "post": {
+                "tags": [
+                    "delivery"
+                ],
+                "summary": "注文を更新する",
+                "operationId": "385b03a9aac4160f035047fd4cdde378",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "delivery_date",
+                                    "quantity",
+                                    "customer_id",
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "注文ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "delivery_date": {
+                                        "description": "注文日",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023/03/07"
+                                    },
+                                    "quantity": {
+                                        "description": "注文量",
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "customer_id": {
+                                        "description": "顧客ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の更新に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "数量は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の更新に失敗しました"
                                         }
                                     },
                                     "type": "object"

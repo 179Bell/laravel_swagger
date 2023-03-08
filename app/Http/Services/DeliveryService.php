@@ -71,15 +71,20 @@ class DeliveryService
         $inventory = $this->inventory->getInventoryByProductId($attributes['product_id']);
 
         // 【TODO】Sweaggerで複数の同じステータスコードのレスポンスの記述がわかるまで一旦コメントアウト
-        // if ($inventory[0]['quantity'] === self::EMPTY) {
-        //     return self::STOCK_EMPTY;
-        // } elseif ($inventory[0]['quantity'] < $attributes['quantity']) {
-        //     return self::STOCK_SHORTAGE;
-        // }
-
-        if ($inventory[0]['quantity'] === self::EMPTY) return false;
-        if ($inventory[0]['quantity'] < $attributes['quantity']) return false;
+        // if ($inventory[0]['quantity'] === self::EMPTY) return false;
+        // if ($inventory[0]['quantity'] < $attributes['quantity']) return false;
 
         return $this->delivery->createDelivery($attributes);
+    }
+
+    /**
+     * 注文情報を更新する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function updateDelivery(array $attributes): bool
+    {
+        return $this->delivery->updateDelivery($attributes);
     }
 }

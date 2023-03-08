@@ -183,4 +183,89 @@ class DeliveryController extends Controller
             'successMessage' => '注文の登録に成功しました'
         ], Response::HTTP_CREATED);
     }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/updateDelivery",
+     *     tags={"delivery"},
+     *     summary="注文を更新する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id","delivery_date","quantity","customer_id","product_id"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="string",
+     *                      description="注文ID",
+     *                      example="1",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="delivery_date",
+     *                      type="date",
+     *                      description="注文日",
+     *                      example="2023/03/07",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="quantity",
+     *                      type="string",
+     *                      description="注文量",
+     *                      example="20",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="customer_id",
+     *                      type="string",
+     *                      description="顧客ID",
+     *                      example="1",
+     *                     ),
+     *                   @OA\Property(
+     *                      property="product_id",
+     *                      type="string",
+     *                      description="商品ID",
+     *                      example="3",
+     *                     ),
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="注文の更新に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="バリデーションエラー発生時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="validationErrorMessage", type="string", description="バリデーションエラー時のメッセージ", example="数量は必須です"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="登録失敗時のメッセージ", example="注文の更新に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 注文情報を更新してJSONレスポンスを返す
+     *
+     * @param DeliveryRequest $request
+     * @return void
+     */
+    public function updateDelivery(DeliveryRequest $request)
+    {
+        $deliveries = $request->only(['id', 'delivery_date', 'quantity', 'product_id', 'customer_id', 'is_delivered']);
+        $result = $this->service->updateDelivery($deliveries);
+
+        if ($result === self::FAILED) {
+            return response()->json([
+                'failedMessage' => '注文の更新に失敗しました。'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            'successMessage' => '注文の更新に成功しました'
+        ], Response::HTTP_CREATED);
+    }
 }

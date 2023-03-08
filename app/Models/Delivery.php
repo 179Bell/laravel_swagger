@@ -52,4 +52,24 @@ class Delivery extends Model
     {
         return Delivery::fill($attributes)->save();
     }
+
+    /**
+     * 注文情報を更新する
+     *
+     * @param array $attributes
+     * @return boolean
+     */
+    public function updateDelivery(array $attributes): bool
+    {
+        $deliveryId = $attributes['id'];
+
+        $params = [
+            'delivery_date' => $attributes['delivery_date'],
+            'quantity'      => $attributes['quantity'],
+            'product_id'    => $attributes['product_id'],
+            'customer_id'   => $attributes['customer_id']
+        ];
+
+        return Delivery::find($deliveryId)->fill($params)->save();
+    }
 }

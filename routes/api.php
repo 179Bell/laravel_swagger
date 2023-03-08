@@ -37,3 +37,4 @@ Route::post('/deleteCustomer', [CustomerController::class, 'deleteCustomer']);
 Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
 Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
 Route::post('/createDelivery', [DeliveryController::class, 'createDelivery']);
+Route::post('/updateDelivery', [DeliveryController::class, 'updateDelivery']);
