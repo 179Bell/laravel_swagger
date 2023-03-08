@@ -251,9 +251,9 @@ class DeliveryController extends Controller
      * 注文情報を更新してJSONレスポンスを返す
      *
      * @param DeliveryRequest $request
-     * @return void
+     * @return JsonResponse
      */
-    public function updateDelivery(DeliveryRequest $request)
+    public function updateDelivery(DeliveryRequest $request): JsonResponse
     {
         $deliveries = $request->only(['id', 'delivery_date', 'quantity', 'product_id', 'customer_id', 'is_delivered']);
         $result = $this->service->updateDelivery($deliveries);
@@ -266,6 +266,60 @@ class DeliveryController extends Controller
 
         return response()->json([
             'successMessage' => '注文の更新に成功しました'
+        ], Response::HTTP_CREATED);
+    }
+
+    /**
+     *  @OA\Post(
+     *     path="/api/updateDelivery",
+     *     tags={"delivery"},
+     *     summary="注文を更新する",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"id","delivery_date","quantity","customer_id","product_id"},
+     *                   @OA\Property(
+     *                      property="id",
+     *                      type="string",
+     *                      description="注文ID",
+     *                      example="1",
+     *                     )
+     *            )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="成功時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="successMessage", type="string", description="成功時のメッセージ", example="注文の削除に成功しました"),
+     *          )
+     *      ),
+     *     @OA\Response(
+     *          response="500",
+     *          description="登録失敗時のレスポンス",
+     *          @OA\JsonContent(
+     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="注文の削除に失敗しました"),
+     *          )
+     *      )
+     * )
+     * 注文情報を削除してJSONレスポンスを返す
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteDelivery(Request $request): JsonResponse
+    {
+        $deliveryId = $request->only(['id']);
+        $result = $this->service->deleteDelivery($deliveryId['id']);
+
+        if ($result === self::FAILED) {
+            return response()->json([
+                'failedMessage' => '注文の削除に失敗しました'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            'successMessage' => '注文の削除に成功しました'
         ], Response::HTTP_CREATED);
     }
 }

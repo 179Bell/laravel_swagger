@@ -72,4 +72,15 @@ class Delivery extends Model
 
         return Delivery::find($deliveryId)->fill($params)->save();
     }
+
+    /**
+     * 注文情報を削除する
+     *
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteDelivery(string $id): bool
+    {
+        return Delivery::find($id)->delete();
+    }
 }

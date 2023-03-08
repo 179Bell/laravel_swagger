@@ -38,3 +38,4 @@ Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
 Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
 Route::post('/createDelivery', [DeliveryController::class, 'createDelivery']);
 Route::post('/updateDelivery', [DeliveryController::class, 'updateDelivery']);
+Route::post('/deleteDelivery', [DeliveryController::class, 'deleteDelivery']);

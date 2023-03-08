@@ -87,4 +87,15 @@ class DeliveryService
     {
         return $this->delivery->updateDelivery($attributes);
     }
+
+    /**
+     * 注文情報を削除する
+     *
+     * @param string $id
+     * @return boolean
+     */
+    public function deleteDelivery(string $id): bool
+    {
+        return $this->delivery->deleteDelivery($id);
+    }
 }
