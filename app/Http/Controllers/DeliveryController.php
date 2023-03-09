@@ -12,8 +12,6 @@ use App\Enums\Stock;
 
 class DeliveryController extends Controller
 {
-    private const FAILED = 0;
-
     public function __construct(DeliveryService $service)
     {
         $this->service = $service;
@@ -159,7 +157,7 @@ class DeliveryController extends Controller
         $deliveries = $request->only(['delivery_date', 'quantity', 'product_id', 'customer_id', 'is_delivered']);
         $result = $this->service->createDelivery($deliveries);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json([
                 'failedMessage' => '注文の登録に失敗しました。'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -257,7 +255,7 @@ class DeliveryController extends Controller
         $deliveries = $request->only(['id', 'delivery_date', 'quantity', 'product_id', 'customer_id', 'is_delivered']);
         $result = $this->service->updateDelivery($deliveries);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json([
                 'failedMessage' => '注文の更新に失敗しました。'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -311,7 +309,7 @@ class DeliveryController extends Controller
         $deliveryId = $request->only(['id']);
         $result = $this->service->deleteDelivery($deliveryId['id']);
 
-        if ($result === self::FAILED) {
+    if (!$result) {
             return response()->json([
                 'failedMessage' => '注文の削除に失敗しました'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);

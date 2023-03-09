@@ -19,8 +19,6 @@ use function PHPUnit\Framework\returnSelf;
  */
 class ProductController extends Controller
 {
-    private const FAILED = 0;
-
     public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
@@ -171,7 +169,7 @@ class ProductController extends Controller
 
         $result = $this->productService->createProduct($data);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('商品情報の登録に失敗しました', 500);
         }
 
@@ -259,7 +257,7 @@ class ProductController extends Controller
 
         $result = $this->productService->updateProduct($data);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('商品情報の更新に失敗しました', 500);
         }
 
@@ -310,7 +308,7 @@ class ProductController extends Controller
 
         $result = $this->productService->deleteProduct($request['id']);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('商品情報の削除に失敗しました', 500);
         }
 

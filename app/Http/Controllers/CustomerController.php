@@ -10,8 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class CustomerController extends Controller
 {
-    private const FAILED = 0;
-
     public function __construct(CustomerService $service)
     {
         $this->service = $service;
@@ -153,7 +151,7 @@ class CustomerController extends Controller
         $attributes = $request->only(['prefecture', 'city', 'address', 'customer_name']);
         $result = $this->service->createCustomer($attributes);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('顧客情報の新規登録に失敗しました', 500);
         }
 
@@ -234,7 +232,7 @@ class CustomerController extends Controller
         $attributes = $request->only(['id', 'prefecture', 'city', 'address', 'customer_name']);
         $result = $this->service->updateCustomer($attributes);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('顧客情報の更新に失敗しました', 500);
         }
 
@@ -284,7 +282,7 @@ class CustomerController extends Controller
         $attributes = $request->only(['id']);
         $result = $this->service->deleteCustomer($attributes['id']);
 
-        if ($result === self::FAILED) {
+        if (!$result) {
             return response()->json('顧客情報の削除に失敗しました', 500);
         }
 
