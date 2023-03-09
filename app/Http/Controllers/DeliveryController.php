@@ -8,12 +8,11 @@ use App\Http\Services\DeliveryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Enums\Stock;
 
 class DeliveryController extends Controller
 {
     private const FAILED = 0;
-    private const STOCK_EMPTY = 2;
-    private const STOCK_SHORTAGE = 3;
 
     public function __construct(DeliveryService $service)
     {
@@ -167,13 +166,13 @@ class DeliveryController extends Controller
         }
 
         // 【TODO】複数の500レスポンスの記述がわかるまで一旦一律同じエラーを返す
-        // if ($result === self::STOCK_EMPTY) {
+        // if ($result === Stock::getvalue('STOCK_EMPTY')) {
         //     return response()->json([
         //             'stockEmptyMessage' => '選択した商品の在庫がありません'
         //         ], Response::HTTP_INTERNAL_SERVER_ERROR);
         // }
 
-        // if ($result === self::STOCK_SHORTAGE) {
+        // if ($result === Stock::getValue('STOCK_SHORTAGE)) {
         //     return response()->json([
         //         'stockShortageMessage' => '在庫が注文量より下回っています'
         //     ], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -298,7 +297,7 @@ class DeliveryController extends Controller
      *          response="500",
      *          description="登録失敗時のレスポンス",
      *          @OA\JsonContent(
-     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="注文の削除に失敗しました"),
+     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="注文のに失敗しました"),
      *          )
      *      )
      * )

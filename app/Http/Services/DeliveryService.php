@@ -7,15 +7,10 @@ namespace App\Http\Services;
 use App\Models\Delivery;
 use App\Models\Inventory;
 use Illuminate\Support\Collection;
-
-use function PHPUnit\Framework\returnSelf;
+use App\Enums\Stock;
 
 class DeliveryService
 {
-    private const EMPTY = '0';
-    private const STOCK_EMPTY = 2;
-    private const STOCK_SHORTAGE = 3;
-
     public function __construct(
         Delivery $delivery,
         Inventory $inventory)
@@ -71,7 +66,7 @@ class DeliveryService
         $inventory = $this->inventory->getInventoryByProductId($attributes['product_id']);
 
         // 【TODO】Sweaggerで複数の同じステータスコードのレスポンスの記述がわかるまで一旦コメントアウト
-        // if ($inventory[0]['quantity'] === self::EMPTY) return false;
+        // if ($inventory[0]['quantity'] === Stock::getValue('EMPTY')) return false;
         // if ($inventory[0]['quantity'] < $attributes['quantity']) return false;
 
         return $this->delivery->createDelivery($attributes);
