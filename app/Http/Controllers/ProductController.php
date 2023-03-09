@@ -7,6 +7,7 @@ use App\Http\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -170,10 +171,14 @@ class ProductController extends Controller
         $result = $this->productService->createProduct($data);
 
         if (!$result) {
-            return response()->json('商品情報の登録に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '商品情報の登録に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('商品情報の新規登録に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '商品情報の新規登録に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -258,10 +263,14 @@ class ProductController extends Controller
         $result = $this->productService->updateProduct($data);
 
         if (!$result) {
-            return response()->json('商品情報の更新に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '商品情報の更新に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('商品情報の更新に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '商品情報の更新に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -309,9 +318,13 @@ class ProductController extends Controller
         $result = $this->productService->deleteProduct($request['id']);
 
         if (!$result) {
-            return response()->json('商品情報の削除に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '商品情報の削除に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('商品情報の削除に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '商品情報の削除に成功しました'
+                ], Response::HTTP_CREATED);
     }
 }

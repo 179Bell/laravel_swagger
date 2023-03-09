@@ -159,8 +159,8 @@ class DeliveryController extends Controller
 
         if (!$result) {
             return response()->json([
-                'failedMessage' => '注文の登録に失敗しました。'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                        'failedMessage' => '注文の登録に失敗しました。'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         // 【TODO】複数の500レスポンスの記述がわかるまで一旦一律同じエラーを返す
@@ -177,8 +177,8 @@ class DeliveryController extends Controller
         // }
 
         return response()->json([
-            'successMessage' => '注文の登録に成功しました'
-        ], Response::HTTP_CREATED);
+                    'successMessage' => '注文の登録に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -257,13 +257,13 @@ class DeliveryController extends Controller
 
         if (!$result) {
             return response()->json([
-                'failedMessage' => '注文の更新に失敗しました。'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                        'failedMessage' => '注文の更新に失敗しました。'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return response()->json([
-            'successMessage' => '注文の更新に成功しました'
-        ], Response::HTTP_CREATED);
+                    'successMessage' => '注文の更新に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -311,12 +311,12 @@ class DeliveryController extends Controller
 
     if (!$result) {
             return response()->json([
-                'failedMessage' => '注文の削除に失敗しました'
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                        'failedMessage' => '注文の削除に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return response()->json([
-            'successMessage' => '注文の削除に成功しました'
-        ], Response::HTTP_CREATED);
+                    'successMessage' => '注文の削除に成功しました'
+                ], Response::HTTP_CREATED);
     }
 }

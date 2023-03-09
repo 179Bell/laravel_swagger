@@ -7,6 +7,7 @@ use App\Http\Services\CustomerService;
 use Illuminate\Http\Request;
 use App\Http\Requests\CustomerRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
@@ -152,10 +153,14 @@ class CustomerController extends Controller
         $result = $this->service->createCustomer($attributes);
 
         if (!$result) {
-            return response()->json('顧客情報の新規登録に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '顧客情報の新規登録に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('顧客情報の新規登録に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '顧客情報の新規登録に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -233,10 +238,14 @@ class CustomerController extends Controller
         $result = $this->service->updateCustomer($attributes);
 
         if (!$result) {
-            return response()->json('顧客情報の更新に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '顧客情報の更新に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('顧客情報の更新に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '顧客情報の更新に成功しました'
+                ], Response::HTTP_CREATED);
     }
 
     /**
@@ -283,9 +292,13 @@ class CustomerController extends Controller
         $result = $this->service->deleteCustomer($attributes['id']);
 
         if (!$result) {
-            return response()->json('顧客情報の削除に失敗しました', 500);
+            return response()->json([
+                        'failedMessage' => '顧客情報の削除に失敗しました'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json('顧客情報の削除に成功しました', 201);
+        return response()->json([
+                    'successMessage' => '顧客情報の削除に成功しました'
+                ], Response::HTTP_CREATED);
     }
 }
