@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProductsTableSeeder::class,
             CustomersTableSeeder::class,
-            InventoriesTableSeeder::class,
+            StocksTableSeeder::class,
             // ArticlesTableSeeder::class
             DeliveriesTableSeeder::class
         ]);

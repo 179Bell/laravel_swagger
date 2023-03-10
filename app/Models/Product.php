@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-use App\Models\Inventory;
+use App\Models\Stock;
 use Illuminate\Database\Eloquent\Collection;
 
 class Product extends Model
@@ -25,9 +25,9 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function inventory()
+    public function stock()
     {
-        return $this->hasOne(Inventory::class);
+        return $this->hasOne(Stock::class);
     }
 
     /**

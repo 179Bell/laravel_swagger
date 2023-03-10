@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('在庫ID');
             $table->string('quantity')->comment('在庫量');
             $table->unsignedBigInteger('product_id')->comment('商品ID');
@@ -21,15 +21,5 @@ return new class extends Migration
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('inventories');
     }
 };

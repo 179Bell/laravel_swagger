@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Collection;
 
-class Inventory extends Model
+class Stock extends Model
 {
     use HasFactory;
 
@@ -22,7 +20,7 @@ class Inventory extends Model
      * @param string $id
      * @return Collection
      */
-    public function getInventoryByProductId(string $id): Collection
+    public function getStockByProductId(string $id): Collection
     {
         return Inventory::where('product_id', $id)->get();
     }

@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Http\Services;
 
 use App\Models\Delivery;
-use App\Models\Inventory;
+use App\Models\Stock;
 use Illuminate\Support\Collection;
-use App\Enums\Stock;
+// use App\Enums\Stock;
 
 class DeliveryService
 {
     public function __construct(
         Delivery $delivery,
-        Inventory $inventory)
+        Stock $stock)
     {
         $this->delivery = $delivery;
-        $this->inventory = $inventory;
+        $this->stock = $stock;
     }
 
     /**
@@ -63,11 +63,11 @@ class DeliveryService
      */
     public function createDelivery(array $attributes): bool|int
     {
-        $inventory = $this->inventory->getInventoryByProductId($attributes['product_id']);
+        $stock = $this->stock->getStockByProductId($attributes['product_id']);
 
         // 【TODO】Sweaggerで複数の同じステータスコードのレスポンスの記述がわかるまで一旦コメントアウト
-        // if ($inventory[0]['quantity'] === Stock::getValue('EMPTY')) return false;
-        // if ($inventory[0]['quantity'] < $attributes['quantity']) return false;
+        // if ($stock[0]['quantity'] === Stock::getValue('EMPTY')) return false;
+        // if ($stock[0]['quantity'] < $attributes['quantity']) return false;
 
         return $this->delivery->createDelivery($attributes);
     }

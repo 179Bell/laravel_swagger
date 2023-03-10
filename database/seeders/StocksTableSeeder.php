@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Inventory;
+use App\Models\Stock;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class InventoriesTableSeeder extends Seeder
+class StocksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -38,6 +38,6 @@ class InventoriesTableSeeder extends Seeder
             ]
         ];
 
-        Inventory::insert($params);
+        Stock::insert($params);
     }
 }
