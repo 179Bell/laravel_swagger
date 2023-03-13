@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Faker\Factory;
 class OrdersTableSeeder extends Seeder
 {
     /**
@@ -40,6 +41,6 @@ class OrdersTableSeeder extends Seeder
             ],
         ];
 
-        Delivery::insert($data);
+        Order::insert($data);
     }
 }

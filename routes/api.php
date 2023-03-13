@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DeliveryController;
+// use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,13 @@ Route::post('createCustomer', [CustomerController::class, 'createCustomer']);
 Route::post('/updateCustomer', [CustomerController::class, 'updateCustomer']);
 Route::post('/deleteCustomer', [CustomerController::class, 'deleteCustomer']);
 // 出荷
-Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
-Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
-Route::post('/createDelivery', [DeliveryController::class, 'createDelivery']);
-Route::post('/updateDelivery', [DeliveryController::class, 'updateDelivery']);
-Route::post('/deleteDelivery', [DeliveryController::class, 'deleteDelivery']);
+// Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
+// Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
+// Route::post('/createDelivery', [DeliveryController::class, 'createDelivery']);
+// Route::post('/updateDelivery', [DeliveryController::class, 'updateDelivery']);
+// Route::post('/deleteDelivery', [DeliveryController::class, 'deleteDelivery']);
+Route::get('/allOrder', [OrderController::class, 'getAllOrders']);
+Route::get('/order', [OrderController::class, 'getOrderById']);
+Route::post('/createOrder', [OrderController::class, 'createOrder']);
+Route::post('/updateOrder', [OrderController::class, 'updateOrder']);
+Route::post('/deleteOrder', [OrderController::class, 'deleteOrder']);
