@@ -34,12 +34,7 @@ Route::get('/customer', [CustomerController::class, 'getCustomer']);
 Route::post('createCustomer', [CustomerController::class, 'createCustomer']);
 Route::post('/updateCustomer', [CustomerController::class, 'updateCustomer']);
 Route::post('/deleteCustomer', [CustomerController::class, 'deleteCustomer']);
-// 出荷
-// Route::get('/allDelivery', [DeliveryController::class, 'getAllDeliveries']);
-// Route::get('/delivery', [DeliveryController::class, 'getDeliveryById']);
-// Route::post('/createDelivery', [DeliveryController::class, 'createDelivery']);
-// Route::post('/updateDelivery', [DeliveryController::class, 'updateDelivery']);
-// Route::post('/deleteDelivery', [DeliveryController::class, 'deleteDelivery']);
+// 注文
 Route::get('/allOrder', [OrderController::class, 'getAllOrders']);
 Route::get('/order', [OrderController::class, 'getOrderById']);
 Route::post('/createOrder', [OrderController::class, 'createOrder']);

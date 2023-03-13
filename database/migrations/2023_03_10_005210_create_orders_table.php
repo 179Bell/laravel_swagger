@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('order_date')->comment('発送日');
+            $table->date('order_date')->comment('注文日');
             $table->string('quantity')->comment('数量');
             $table->string('product_id')->comment('商品ID');
             $table->string('customer_id')->comment('顧客ID');

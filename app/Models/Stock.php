@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class Stock extends Model
 {
@@ -22,6 +23,6 @@ class Stock extends Model
      */
     public function getStockByProductId(string $id): Collection
     {
-        return Inventory::where('product_id', $id)->get();
+        return Stock::where('product_id', $id)->get();
     }
 }
