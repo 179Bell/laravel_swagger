@@ -15,6 +15,11 @@ class Stock extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function getAllStocks()
+    {
+        return Stock::join('products', 'stocks.product_id', '=', 'products.id')->get();
+    }
+
     /**
      * 商品IDから在庫を取得する
      *
