@@ -42,22 +42,24 @@ class StockList extends Command
             '商品カテゴリー',
         ];
 
-        mb_convert_encoding($head, 'SJIS', 'UTF-8');
+        mb_convert_variables('SJIS', 'UTF-8', $head);
         fputcsv($stream, $head);
 
         $model = new Stock();
         $stocks = $model->getAllStocks();
 
         foreach ($stocks as $stock) {
-            mb_convert_encoding($stock, 'SJIS', 'UTF-8');
-            fputcsv($stream, [
+            mb_convert_encoding($stock, "SJIS", "UTF-8");
+            $data = [
                 $stock->quantity,
                 $stock->product_name,
                 CategoryType::getDescription($stock->category_id),
-            ]);
+            ];
+
+            mb_convert_variables('SJIS', 'UTF-8', $data);
+            fputcsv($stream, $data);
         }
 
-        // $convertData = mb_convert_encoding($data, 'SJIS', 'UTF-8');
         fclose($stream);
     }
 }
