@@ -268,14 +268,14 @@ class OrderController extends Controller
 
     /**
      *  @OA\Post(
-     *     path="/api/updateOrder",
+     *     path="/api/deleteOrder",
      *     tags={"order"},
-     *     summary="注文を更新する",
+     *     summary="注文を削除する",
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(
      *              type="object",
-     *              required={"id","order_date","quantity","customer_id","product_id"},
+     *              required={"id"},
      *                   @OA\Property(
      *                      property="id",
      *                      type="string",
@@ -295,7 +295,7 @@ class OrderController extends Controller
      *          response="500",
      *          description="登録失敗時のレスポンス",
      *          @OA\JsonContent(
-     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="注文のに失敗しました"),
+     *                @OA\Property(property="failedMessage", type="string", description="失敗時のメッセージ", example="注文の削除に失敗しました"),
      *          )
      *      )
      * )

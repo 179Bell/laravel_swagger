@@ -410,13 +410,13 @@
                 }
             }
         },
-        "/api/allDelivery": {
+        "/api/allOrder": {
             "get": {
                 "tags": [
-                    "delivery"
+                    "order"
                 ],
                 "summary": "すべての注文情報を取得する",
-                "operationId": "0c7487d5c84aa6686cc53860b34dda44",
+                "operationId": "0f2e762b09e7dc84b3b68cf922668714",
                 "responses": {
                     "200": {
                         "description": "成功時のレスポンス",
@@ -429,7 +429,7 @@
                                             "type": "integer",
                                             "example": 1
                                         },
-                                        "delivery_date": {
+                                        "order_date": {
                                             "description": "注文日",
                                             "type": "string",
                                             "format": "date",
@@ -474,13 +474,13 @@
                 }
             }
         },
-        "/api/delivery": {
+        "/api/order": {
             "get": {
                 "tags": [
-                    "delivery"
+                    "order"
                 ],
                 "summary": "注文IDから注文情報を取得する",
-                "operationId": "f4d29ee591339b804973313d1345d15a",
+                "operationId": "a5475fb0eee91add673bc43b7fe6947c",
                 "parameters": [
                     {
                         "name": "id",
@@ -510,7 +510,7 @@
                                             "type": "integer",
                                             "example": 1
                                         },
-                                        "delivery_date": {
+                                        "order_date": {
                                             "description": "注文日",
                                             "type": "string",
                                             "format": "date",
@@ -570,26 +570,26 @@
                 }
             }
         },
-        "/api/createDelivery": {
+        "/api/createOrder": {
             "post": {
                 "tags": [
-                    "delivery"
+                    "order"
                 ],
                 "summary": "注文を新規登録する",
-                "operationId": "99134add82c3ffdb1a8ae62b3d50c562",
+                "operationId": "14c94c1cafa914ed0851706a83803cc4",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "delivery_date",
+                                    "order_date",
                                     "quantity",
                                     "customer_id",
                                     "product_id"
                                 ],
                                 "properties": {
-                                    "delivery_date": {
+                                    "order_date": {
                                         "description": "注文日",
                                         "type": "string",
                                         "format": "date",
@@ -671,13 +671,13 @@
                 }
             }
         },
-        "/api/updateDelivery": {
+        "/api/updateOrder": {
             "post": {
                 "tags": [
-                    "delivery"
+                    "order"
                 ],
                 "summary": "注文を更新する",
-                "operationId": "385b03a9aac4160f035047fd4cdde378",
+                "operationId": "af533e5c435b4e6e6eb0240d20b50155",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -685,7 +685,7 @@
                             "schema": {
                                 "required": [
                                     "id",
-                                    "delivery_date",
+                                    "order_date",
                                     "quantity",
                                     "customer_id",
                                     "product_id"
@@ -696,7 +696,7 @@
                                         "type": "string",
                                         "example": "1"
                                     },
-                                    "delivery_date": {
+                                    "order_date": {
                                         "description": "注文日",
                                         "type": "string",
                                         "format": "date",
@@ -768,6 +768,71 @@
                                             "description": "登録失敗時のメッセージ",
                                             "type": "string",
                                             "example": "注文の更新に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/deleteOrder": {
+            "post": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "注文を削除する",
+                "operationId": "d462ba6e7d6f7466ce8f4274fab8cc72",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "注文ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の削除に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の削除に失敗しました"
                                         }
                                     },
                                     "type": "object"
