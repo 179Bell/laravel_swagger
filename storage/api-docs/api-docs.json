@@ -64,13 +64,13 @@
                 }
             }
         },
-        "/api/customer?id=1": {
+        "/api/customer": {
             "get": {
                 "tags": [
                     "customer"
                 ],
                 "summary": "顧客IDから顧客情報を取得する",
-                "operationId": "88f8f93c23da4222a8ac2ef4c58ce23e",
+                "operationId": "fc45d0aba969d5e75cb721ca06061f66",
                 "parameters": [
                     {
                         "name": "id",
@@ -142,7 +142,7 @@
         "/api/createCustomer": {
             "post": {
                 "tags": [
-                    "product"
+                    "customer"
                 ],
                 "summary": "顧客情報を新規登録する",
                 "operationId": "136e24b3fffca880cb7f407c1b1c4f1d",
@@ -242,7 +242,7 @@
         "/api/updateCustomer": {
             "post": {
                 "tags": [
-                    "product"
+                    "customer"
                 ],
                 "summary": "顧客情報を更新する",
                 "operationId": "aff0a5e54c9a45c1bf5330e0702f0e3c",
