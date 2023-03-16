@@ -47,7 +47,7 @@ class CustomerController extends Controller
 
     /**
      *  @OA\Get(
-     *     path="/api/customer?id=1",
+     *     path="/api/customer",
      *     tags={"customer"},
      *     summary="顧客IDから顧客情報を取得する",
      *     @OA\Parameter(
@@ -87,7 +87,7 @@ class CustomerController extends Controller
     /**
      *  @OA\Post(
      *     path="/api/createCustomer",
-     *     tags={"product"},
+     *     tags={"customer"},
      *     summary="顧客情報を新規登録する",
      *     @OA\RequestBody(
      *          required=true,
@@ -166,7 +166,7 @@ class CustomerController extends Controller
     /**
      *  @OA\Post(
      *     path="/api/updateCustomer",
-     *     tags={"product"},
+     *     tags={"customer"},
      *     summary="顧客情報を更新する",
      *     @OA\RequestBody(
      *          required=true,
