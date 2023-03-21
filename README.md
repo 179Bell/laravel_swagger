@@ -14,6 +14,3 @@ PHP 8.0.27
 Laravel 9.52.0
 Postman
 GitHub
-SQLite
-
-### その他
