@@ -843,13 +843,13 @@
                 }
             }
         },
-        "/api/allProduct": {
+        "/api/v1/products": {
             "get": {
                 "tags": [
                     "product"
                 ],
                 "summary": "すべての商品情報と在庫情報を取得する",
-                "operationId": "8ffb66e7f25b669bd189b84ea4e36fee",
+                "operationId": "2edf916735efe3678721a3da72a4a052",
                 "responses": {
                     "200": {
                         "description": "成功時のレスポンス",
@@ -906,13 +906,13 @@
                 }
             }
         },
-        "/api/product?id=1": {
+        "/api/v1/product/{id}": {
             "get": {
                 "tags": [
                     "product"
                 ],
                 "summary": "商品IDから商品情報と在庫情報を取得する",
-                "operationId": "e7dec461746d277a870c1676baa0e606",
+                "operationId": "a480e1100e7405e8d4c4216044998e31",
                 "parameters": [
                     {
                         "name": "id",
@@ -986,119 +986,13 @@
                 }
             }
         },
-        "/api/createProduct": {
-            "post": {
-                "tags": [
-                    "product"
-                ],
-                "summary": "商品情報を新規登録する",
-                "operationId": "7839b5d40eddc2a17dc26bab81e0f4f7",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "product_name",
-                                    "product_origin",
-                                    "description",
-                                    "category_id",
-                                    "price"
-                                ],
-                                "properties": {
-                                    "product_name": {
-                                        "description": "商品名",
-                                        "type": "string",
-                                        "example": "牡蠣"
-                                    },
-                                    "product_origin": {
-                                        "description": "生産地",
-                                        "type": "string",
-                                        "example": "広島県"
-                                    },
-                                    "description": {
-                                        "description": "商品の説明",
-                                        "type": "string",
-                                        "example": "江田島産牡蠣"
-                                    },
-                                    "category_id": {
-                                        "description": "商品カテゴリー",
-                                        "type": "string",
-                                        "example": "牡蠣"
-                                    },
-                                    "price": {
-                                        "description": "価格",
-                                        "type": "string",
-                                        "example": "100"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "successMessage": {
-                                            "description": "成功時のメッセージ",
-                                            "type": "string",
-                                            "example": "商品情報の新規登録に成功しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "バリデーションエラー発生時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "validationErrorMessage": {
-                                            "description": "バリデーションエラー時のメッセージ",
-                                            "type": "string",
-                                            "example": "商品名は必須です"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "登録失敗時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "failedMessage": {
-                                            "description": "登録失敗時のメッセージ",
-                                            "type": "string",
-                                            "example": "商品情報の新規登録に失敗しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/updateProduct": {
-            "post": {
+        "/api/products": {
+            "put": {
                 "tags": [
                     "product"
                 ],
                 "summary": "商品情報を更新する",
-                "operationId": "478194fb5af3d7750887deab734918d5",
+                "operationId": "19e9fc4bacd37eb1a3c54f0462345943",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1202,15 +1096,117 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/deleteProduct": {
+            },
             "post": {
                 "tags": [
                     "product"
                 ],
+                "summary": "商品情報を新規登録する",
+                "operationId": "f79470c2afbdb583882235160180a63d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "product_name",
+                                    "product_origin",
+                                    "description",
+                                    "category_id",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "product_name": {
+                                        "description": "商品名",
+                                        "type": "string",
+                                        "example": "牡蠣"
+                                    },
+                                    "product_origin": {
+                                        "description": "生産地",
+                                        "type": "string",
+                                        "example": "広島県"
+                                    },
+                                    "description": {
+                                        "description": "商品の説明",
+                                        "type": "string",
+                                        "example": "江田島産牡蠣"
+                                    },
+                                    "category_id": {
+                                        "description": "商品カテゴリー",
+                                        "type": "string",
+                                        "example": "牡蠣"
+                                    },
+                                    "price": {
+                                        "description": "価格",
+                                        "type": "string",
+                                        "example": "100"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品名は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "商品情報の新規登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "product"
+                ],
                 "summary": "商品情報を削除する",
-                "operationId": "14fb13bf05cd2dbe2910fed4ba79b287",
+                "operationId": "43fa3020b3a3467ac8d21489128efdf6",
                 "requestBody": {
                     "required": true,
                     "content": {

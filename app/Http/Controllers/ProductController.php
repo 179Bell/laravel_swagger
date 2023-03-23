@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/allProduct",
+     *     path="/api/v1/products",
      *     tags={"product"},
      *     summary="すべての商品情報と在庫情報を取得する",
      *     @OA\Response(
@@ -57,7 +57,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/product?id=1",
+     *     path="/api/v1/product/{id}",
      *     tags={"product"},
      *     summary="商品IDから商品情報と在庫情報を取得する",
      *     @OA\Parameter(
@@ -85,19 +85,18 @@ class ProductController extends Controller
      * )
      *商品のIDから商品の情報を取得する
      *
-     * @param Request $request
+     * @param string $id
      * @return ProductResource
      */
-    public function getProductById(Request $request): ProductResource
+    public function getProductById($id): ProductResource
     {
-        $id = $request->query('id');
         $data = $this->productService->getProductById($id);
         return new ProductResource($data);
     }
 
     /**
      *  @OA\Post(
-     *     path="/api/createProduct",
+     *     path="/api/products",
      *     tags={"product"},
      *     summary="商品情報を新規登録する",
      *     @OA\RequestBody(
@@ -182,8 +181,8 @@ class ProductController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/updateProduct",
+     *  @OA\Put(
+     *     path="/api/products",
      *     tags={"product"},
      *     summary="商品情報を更新する",
      *     @OA\RequestBody(
@@ -274,8 +273,8 @@ class ProductController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/deleteProduct",
+     *  @OA\Delete(
+     *     path="/api/products",
      *     tags={"product"},
      *     summary="商品情報を削除する",
      *     @OA\RequestBody(
@@ -308,14 +307,12 @@ class ProductController extends Controller
      * )
      * 商品情報を削除する
      *
-     * @param Request $request
+     * @param string $id
      * @return JsonResponse
      */
-    public function deleteProduct(Request $request): JsonResponse
+    public function deleteProduct($id): JsonResponse
     {
-        $request = $request->only(['id']);
-
-        $result = $this->productService->deleteProduct($request['id']);
+        $result = $this->productService->deleteProduct($id);
 
         if (!$result) {
             return response()->json([
