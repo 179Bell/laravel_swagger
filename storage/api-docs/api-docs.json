@@ -6,13 +6,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/allCustomer": {
+        "/api/v1/customers": {
             "get": {
                 "tags": [
                     "customer"
                 ],
                 "summary": "すべての顧客情報を取得する",
-                "operationId": "19f70968d74cbcada5d5892c4c7a30e7",
+                "operationId": "e9252956aab49e868b4bb755e814c93f",
                 "responses": {
                     "200": {
                         "description": "成功時のレスポンス",
@@ -62,190 +62,13 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/customer": {
-            "get": {
-                "tags": [
-                    "customer"
-                ],
-                "summary": "顧客IDから顧客情報を取得する",
-                "operationId": "fc45d0aba969d5e75cb721ca06061f66",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "顧客ID",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "int": {
-                                "summary": "サンプルID",
-                                "value": "1"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "description": "顧客ID",
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "prefecture": {
-                                            "description": "都道府県",
-                                            "type": "string",
-                                            "example": "茨城県"
-                                        },
-                                        "city": {
-                                            "description": "市町村名",
-                                            "type": "string",
-                                            "example": "中島市"
-                                        },
-                                        "address": {
-                                            "description": "市町村以降の住所",
-                                            "type": "string",
-                                            "example": "若松町村山1-2-3"
-                                        },
-                                        "customer_name": {
-                                            "description": "顧客名",
-                                            "type": "string",
-                                            "example": "山田太郎"
-                                        },
-                                        "created_at": {
-                                            "description": "作成日時",
-                                            "type": "string",
-                                            "example": "2023-02-23T10:33:28.000000Z"
-                                        },
-                                        "updated_at": {
-                                            "description": "更新日時",
-                                            "type": "string",
-                                            "example": "2023-02-23T10:33:28.000000Z"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/createCustomer": {
-            "post": {
-                "tags": [
-                    "customer"
-                ],
-                "summary": "顧客情報を新規登録する",
-                "operationId": "136e24b3fffca880cb7f407c1b1c4f1d",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "prefecture",
-                                    "city",
-                                    "address",
-                                    "customer_name"
-                                ],
-                                "properties": {
-                                    "prefecture": {
-                                        "description": "都道府県",
-                                        "type": "string",
-                                        "example": "愛知県"
-                                    },
-                                    "city": {
-                                        "description": "市町村名",
-                                        "type": "string",
-                                        "example": "名古屋市"
-                                    },
-                                    "address": {
-                                        "description": "住所",
-                                        "type": "string",
-                                        "example": "千種区光ケ丘"
-                                    },
-                                    "customer_name": {
-                                        "description": "顧客名",
-                                        "type": "string",
-                                        "example": "山田太郎"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "successMessage": {
-                                            "description": "成功時のメッセージ",
-                                            "type": "string",
-                                            "example": "顧客情報の新規登録に成功しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "バリデーションエラー発生時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "validationErrorMessage": {
-                                            "description": "バリデーションエラー時のメッセージ",
-                                            "type": "string",
-                                            "example": "都道府県は必須です"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "登録失敗時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "failedMessage": {
-                                            "description": "登録失敗時のメッセージ",
-                                            "type": "string",
-                                            "example": "顧客情報の新規登録に失敗しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/updateCustomer": {
-            "post": {
+            },
+            "put": {
                 "tags": [
                     "customer"
                 ],
                 "summary": "顧客情報を更新する",
-                "operationId": "aff0a5e54c9a45c1bf5330e0702f0e3c",
+                "operationId": "638b19f487acd26f75386fb216755c8a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -343,15 +166,186 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/deleteCustomer": {
+            },
             "post": {
                 "tags": [
                     "customer"
                 ],
+                "summary": "顧客情報を新規登録する",
+                "operationId": "6b87befb1c0b6877d36002647c76e3e4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "prefecture",
+                                    "city",
+                                    "address",
+                                    "customer_name"
+                                ],
+                                "properties": {
+                                    "prefecture": {
+                                        "description": "都道府県",
+                                        "type": "string",
+                                        "example": "愛知県"
+                                    },
+                                    "city": {
+                                        "description": "市町村名",
+                                        "type": "string",
+                                        "example": "名古屋市"
+                                    },
+                                    "address": {
+                                        "description": "住所",
+                                        "type": "string",
+                                        "example": "千種区光ケ丘"
+                                    },
+                                    "customer_name": {
+                                        "description": "顧客名",
+                                        "type": "string",
+                                        "example": "山田太郎"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "顧客情報の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "都道府県は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "顧客情報の新規登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/customers/{id}": {
+            "get": {
+                "tags": [
+                    "customer"
+                ],
+                "summary": "顧客IDから顧客情報を取得する",
+                "operationId": "136593e206cc2a322edf5c9c4658a701",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "顧客ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "顧客ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "prefecture": {
+                                            "description": "都道府県",
+                                            "type": "string",
+                                            "example": "茨城県"
+                                        },
+                                        "city": {
+                                            "description": "市町村名",
+                                            "type": "string",
+                                            "example": "中島市"
+                                        },
+                                        "address": {
+                                            "description": "市町村以降の住所",
+                                            "type": "string",
+                                            "example": "若松町村山1-2-3"
+                                        },
+                                        "customer_name": {
+                                            "description": "顧客名",
+                                            "type": "string",
+                                            "example": "山田太郎"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "customer"
+                ],
                 "summary": "顧客情報を削除する",
-                "operationId": "e9b9e44f58cdfb7381c540ebae8e2cea",
+                "operationId": "7c70f6a1fbfe7f3e927643178d35f4a4",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -410,13 +404,13 @@
                 }
             }
         },
-        "/api/allOrder": {
+        "/api/v1/orders": {
             "get": {
                 "tags": [
                     "order"
                 ],
                 "summary": "すべての注文情報を取得する",
-                "operationId": "0f2e762b09e7dc84b3b68cf922668714",
+                "operationId": "8ec3d784fbe14b4db8050b7c9de7c10a",
                 "responses": {
                     "200": {
                         "description": "成功時のレスポンス",
@@ -472,15 +466,78 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "注文を削除する",
+                "operationId": "a56d401471c199cb9ca36b6ec64160a5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "注文ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の削除に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の削除に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/api/order": {
+        "/api/v1/orders/{id}": {
             "get": {
                 "tags": [
                     "order"
                 ],
                 "summary": "注文IDから注文情報を取得する",
-                "operationId": "a5475fb0eee91add673bc43b7fe6947c",
+                "operationId": "029937f512de789424c8d2cdf3f6aa2f",
                 "parameters": [
                     {
                         "name": "id",
@@ -570,114 +627,13 @@
                 }
             }
         },
-        "/api/createOrder": {
-            "post": {
-                "tags": [
-                    "order"
-                ],
-                "summary": "注文を新規登録する",
-                "operationId": "14c94c1cafa914ed0851706a83803cc4",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "order_date",
-                                    "quantity",
-                                    "customer_id",
-                                    "product_id"
-                                ],
-                                "properties": {
-                                    "order_date": {
-                                        "description": "注文日",
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2023/03/07"
-                                    },
-                                    "quantity": {
-                                        "description": "注文量",
-                                        "type": "string",
-                                        "example": "20"
-                                    },
-                                    "customer_id": {
-                                        "description": "顧客ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "product_id": {
-                                        "description": "商品ID",
-                                        "type": "string",
-                                        "example": "3"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "successMessage": {
-                                            "description": "成功時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の新規登録に成功しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "バリデーションエラー発生時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "validationErrorMessage": {
-                                            "description": "バリデーションエラー時のメッセージ",
-                                            "type": "string",
-                                            "example": "数量は必須です"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "登録失敗時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "failedMessage": {
-                                            "description": "登録失敗時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の登録に失敗しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/updateOrder": {
-            "post": {
+        "/api/orders": {
+            "put": {
                 "tags": [
                     "order"
                 ],
                 "summary": "注文を更新する",
-                "operationId": "af533e5c435b4e6e6eb0240d20b50155",
+                "operationId": "ab41025e505da7c352ce90e881bada21",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -776,28 +732,45 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/deleteOrder": {
+            },
             "post": {
                 "tags": [
                     "order"
                 ],
-                "summary": "注文を削除する",
-                "operationId": "d462ba6e7d6f7466ce8f4274fab8cc72",
+                "summary": "注文を新規登録する",
+                "operationId": "1ec1e4fc86f29989aa932a94d5422fb4",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "id"
+                                    "order_date",
+                                    "quantity",
+                                    "customer_id",
+                                    "product_id"
                                 ],
                                 "properties": {
-                                    "id": {
-                                        "description": "注文ID",
+                                    "order_date": {
+                                        "description": "注文日",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023/03/07"
+                                    },
+                                    "quantity": {
+                                        "description": "注文量",
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "customer_id": {
+                                        "description": "顧客ID",
                                         "type": "string",
                                         "example": "1"
+                                    },
+                                    "product_id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "3"
                                     }
                                 },
                                 "type": "object"
@@ -815,7 +788,24 @@
                                         "successMessage": {
                                             "description": "成功時のメッセージ",
                                             "type": "string",
-                                            "example": "注文の削除に成功しました"
+                                            "example": "注文の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "数量は必須です"
                                         }
                                     },
                                     "type": "object"
@@ -830,9 +820,9 @@
                                 "schema": {
                                     "properties": {
                                         "failedMessage": {
-                                            "description": "失敗時のメッセージ",
+                                            "description": "登録失敗時のメッセージ",
                                             "type": "string",
-                                            "example": "注文の削除に失敗しました"
+                                            "example": "注文の登録に失敗しました"
                                         }
                                     },
                                     "type": "object"

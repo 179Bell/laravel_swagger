@@ -169,7 +169,7 @@ class CustomerController extends Controller
      *     summary="顧客情報を更新する",
      *     @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent
+     *          @OA\JsonContent(
      *              type="object",
      *              required={"id","prefecture","city","address","customer_name"},
      *                   @OA\Property(
