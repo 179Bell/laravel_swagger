@@ -28,11 +28,11 @@ Route::prefix('v1')->group((function () {
     Route::put('/products/update', [ProductController::class, 'updateProduct']);
     Route::delete('/products/{id}', [ProductController::class, 'deleteProduct']);
     // 顧客情報
-    Route::get('/allCustomer', [CustomerController::class, 'getAllCustomers']);
-    Route::get('/customer', [CustomerController::class, 'getCustomer']);
-    Route::post('createCustomer', [CustomerController::class, 'createCustomer']);
-    Route::post('/updateCustomer', [CustomerController::class, 'updateCustomer']);
-    Route::post('/deleteCustomer', [CustomerController::class, 'deleteCustomer']);
+    Route::get('/customers', [CustomerController::class, 'getAllCustomers']);
+    Route::get('/customers/{id}', [CustomerController::class, 'getCustomer']);
+    Route::post('customers', [CustomerController::class, 'createCustomer']);
+    Route::put('/customers', [CustomerController::class, 'updateCustomer']);
+    Route::delete('/customer/{id}', [CustomerController::class, 'deleteCustomer']);
     // 注文
     Route::get('/allOrder', [OrderController::class, 'getAllOrders']);
     Route::get('/order', [OrderController::class, 'getOrderById']);

@@ -18,7 +18,7 @@ class CustomerController extends Controller
 
     /**
      *  @OA\Get(
-     *     path="/api/allCustomer",
+     *     path="/api/v1/customers",
      *     tags={"customer"},
      *     summary="すべての顧客情報を取得する",
      *     @OA\Response(
@@ -47,7 +47,7 @@ class CustomerController extends Controller
 
     /**
      *  @OA\Get(
-     *     path="/api/customer",
+     *     path="/api/v1/customers/{id}",
      *     tags={"customer"},
      *     summary="顧客IDから顧客情報を取得する",
      *     @OA\Parameter(
@@ -74,19 +74,18 @@ class CustomerController extends Controller
      * )
      * 顧客IDから顧客情報を検索して取得する
      *
-     * @param Request $request
+     * @param string $id
      * @return CustomerResource
      */
-    public function getCustomer(Request $request): CustomerResource
+    public function getCustomer($id): CustomerResource
     {
-        $id = $request->query('id');
         $customer = $this->service->getCustomerById($id);
         return new CustomerResource($customer);
     }
 
     /**
      *  @OA\Post(
-     *     path="/api/createCustomer",
+     *     path="/api/v1/customers",
      *     tags={"customer"},
      *     summary="顧客情報を新規登録する",
      *     @OA\RequestBody(
@@ -164,13 +163,13 @@ class CustomerController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/updateCustomer",
+     *  @OA\Put(
+     *     path="/api/v1/customers",
      *     tags={"customer"},
      *     summary="顧客情報を更新する",
      *     @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(
+     *          @OA\JsonContent
      *              type="object",
      *              required={"id","prefecture","city","address","customer_name"},
      *                   @OA\Property(
@@ -249,8 +248,8 @@ class CustomerController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/deleteCustomer",
+     *  @OA\Delete(
+     *     path="/api/v1/customers/{id}",
      *     tags={"customer"},
      *     summary="顧客情報を削除する",
      *     @OA\RequestBody(
@@ -283,13 +282,12 @@ class CustomerController extends Controller
      * )
      * 顧客情報を削除して結果をJSONレスポンスで返す
      *
-     * @param Request $request
+     * @param string $id
      * @return JsonResponse
      */
-    public function deleteCustomer(Request $request): JsonResponse
+    public function deleteCustomer($id): JsonResponse
     {
-        $attributes = $request->only(['id']);
-        $result = $this->service->deleteCustomer($attributes['id']);
+        $result = $this->service->deleteCustomer($id);
 
         if (!$result) {
             return response()->json([
