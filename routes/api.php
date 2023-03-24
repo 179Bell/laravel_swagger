@@ -34,10 +34,10 @@ Route::prefix('v1')->group((function () {
     Route::put('/customers', [CustomerController::class, 'updateCustomer']);
     Route::delete('/customer/{id}', [CustomerController::class, 'deleteCustomer']);
     // 注文
-    Route::get('/allOrder', [OrderController::class, 'getAllOrders']);
-    Route::get('/order', [OrderController::class, 'getOrderById']);
-    Route::post('/createOrder', [OrderController::class, 'createOrder']);
-    Route::post('/updateOrder', [OrderController::class, 'updateOrder']);
-    Route::post('/deleteOrder', [OrderController::class, 'deleteOrder']);
+    Route::get('/orders', [OrderController::class, 'getAllOrders']);
+    Route::get('/orders/{id}', [OrderController::class, 'getOrderById']);
+    Route::post('/orders', [OrderController::class, 'createOrder']);
+    Route::put('/orders', [OrderController::class, 'updateOrder']);
+    Route::delete('/orders/{id}', [OrderController::class, 'deleteOrder']);
 }));
 // 商品情報

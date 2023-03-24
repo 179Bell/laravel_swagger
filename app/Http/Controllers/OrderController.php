@@ -8,7 +8,6 @@ use App\Http\Services\OrderService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Enums\Stock;
 
 class OrderController extends Controller
 {
@@ -19,7 +18,7 @@ class OrderController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/allOrder",
+     *     path="/api/v1/orders",
      *     tags={"order"},
      *     summary="すべての注文情報を取得する",
      *     @OA\Response(
@@ -49,7 +48,7 @@ class OrderController extends Controller
 
     /**
      *  @OA\Get(
-     *     path="/api/order",
+     *     path="/api/v1/orders/{id}",
      *     tags={"order"},
      *     summary="注文IDから注文情報を取得する",
      *     @OA\Parameter(
@@ -91,7 +90,7 @@ class OrderController extends Controller
 
     /**
      *  @OA\Post(
-     *     path="/api/createOrder",
+     *     path="/api/orders",
      *     tags={"order"},
      *     summary="注文を新規登録する",
      *     @OA\RequestBody(
@@ -182,8 +181,8 @@ class OrderController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/updateOrder",
+     *  @OA\Put(
+     *     path="/api/orders",
      *     tags={"order"},
      *     summary="注文を更新する",
      *     @OA\RequestBody(
@@ -267,8 +266,8 @@ class OrderController extends Controller
     }
 
     /**
-     *  @OA\Post(
-     *     path="/api/deleteOrder",
+     *  @OA\Delete(
+     *     path="/api/v1/orders",
      *     tags={"order"},
      *     summary="注文を削除する",
      *     @OA\RequestBody(
