@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('customer_id')->comment('顧客ID');
             $table->boolean('is_delivered')->default(false)->comment('発送フラグ');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 };
