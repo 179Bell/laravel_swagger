@@ -96,7 +96,7 @@ class ProductController extends Controller
 
     /**
      *  @OA\Post(
-     *     path="/api/products",
+     *     path="/api/v1/products",
      *     tags={"product"},
      *     summary="商品情報を新規登録する",
      *     @OA\RequestBody(
@@ -182,7 +182,7 @@ class ProductController extends Controller
 
     /**
      *  @OA\Put(
-     *     path="/api/products",
+     *     path="/api/v1/products",
      *     tags={"product"},
      *     summary="商品情報を更新する",
      *     @OA\RequestBody(
@@ -274,7 +274,7 @@ class ProductController extends Controller
 
     /**
      *  @OA\Delete(
-     *     path="/api/products",
+     *     path="/api/v1/products",
      *     tags={"product"},
      *     summary="商品情報を削除する",
      *     @OA\RequestBody(

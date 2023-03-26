@@ -90,7 +90,7 @@ class OrderController extends Controller
 
     /**
      *  @OA\Post(
-     *     path="/api/orders",
+     *     path="/api/v1/orders",
      *     tags={"order"},
      *     summary="注文を新規登録する",
      *     @OA\RequestBody(
@@ -182,7 +182,7 @@ class OrderController extends Controller
 
     /**
      *  @OA\Put(
-     *     path="/api/orders",
+     *     path="/api/v1/orders",
      *     tags={"order"},
      *     summary="注文を更新する",
      *     @OA\RequestBody(
