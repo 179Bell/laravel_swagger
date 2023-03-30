@@ -346,26 +346,23 @@
                 ],
                 "summary": "顧客情報を削除する",
                 "operationId": "7c70f6a1fbfe7f3e927643178d35f4a4",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "description": "顧客ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "顧客ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
                             }
                         }
                     }
-                },
+                ],
                 "responses": {
                     "201": {
                         "description": "成功時のレスポンス",
@@ -467,25 +464,50 @@
                     }
                 }
             },
-            "delete": {
+            "put": {
                 "tags": [
                     "order"
                 ],
-                "summary": "注文を削除する",
-                "operationId": "a56d401471c199cb9ca36b6ec64160a5",
+                "summary": "注文を更新する",
+                "operationId": "164cfe8217f3da58298e7e89b1e20dda",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "id"
+                                    "id",
+                                    "order_date",
+                                    "quantity",
+                                    "customer_id",
+                                    "product_id"
                                 ],
                                 "properties": {
                                     "id": {
                                         "description": "注文ID",
                                         "type": "string",
                                         "example": "1"
+                                    },
+                                    "order_date": {
+                                        "description": "注文日",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023/03/07"
+                                    },
+                                    "quantity": {
+                                        "description": "注文量",
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "customer_id": {
+                                        "description": "顧客ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "3"
                                     }
                                 },
                                 "type": "object"
@@ -493,6 +515,182 @@
                         }
                     }
                 },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の更新に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "数量は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の更新に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "注文を新規登録する",
+                "operationId": "6828ab7ed2a6359577d46f8805e9310e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "order_date",
+                                    "quantity",
+                                    "customer_id",
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "order_date": {
+                                        "description": "注文日",
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023/03/07"
+                                    },
+                                    "quantity": {
+                                        "description": "注文量",
+                                        "type": "string",
+                                        "example": "20"
+                                    },
+                                    "customer_id": {
+                                        "description": "顧客ID",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "description": "商品ID",
+                                        "type": "string",
+                                        "example": "3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "successMessage": {
+                                            "description": "成功時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の新規登録に成功しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー発生時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "validationErrorMessage": {
+                                            "description": "バリデーションエラー時のメッセージ",
+                                            "type": "string",
+                                            "example": "数量は必須です"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "登録失敗時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "failedMessage": {
+                                            "description": "登録失敗時のメッセージ",
+                                            "type": "string",
+                                            "example": "注文の登録に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "order"
+                ],
+                "summary": "注文を削除する",
+                "operationId": "a56d401471c199cb9ca36b6ec64160a5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "注文ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "成功時のレスポンス",
@@ -627,212 +825,6 @@
                 }
             }
         },
-        "/api/orders": {
-            "put": {
-                "tags": [
-                    "order"
-                ],
-                "summary": "注文を更新する",
-                "operationId": "ab41025e505da7c352ce90e881bada21",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "order_date",
-                                    "quantity",
-                                    "customer_id",
-                                    "product_id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "description": "注文ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "order_date": {
-                                        "description": "注文日",
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2023/03/07"
-                                    },
-                                    "quantity": {
-                                        "description": "注文量",
-                                        "type": "string",
-                                        "example": "20"
-                                    },
-                                    "customer_id": {
-                                        "description": "顧客ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "product_id": {
-                                        "description": "商品ID",
-                                        "type": "string",
-                                        "example": "3"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "successMessage": {
-                                            "description": "成功時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の更新に成功しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "バリデーションエラー発生時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "validationErrorMessage": {
-                                            "description": "バリデーションエラー時のメッセージ",
-                                            "type": "string",
-                                            "example": "数量は必須です"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "登録失敗時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "failedMessage": {
-                                            "description": "登録失敗時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の更新に失敗しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "order"
-                ],
-                "summary": "注文を新規登録する",
-                "operationId": "1ec1e4fc86f29989aa932a94d5422fb4",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "order_date",
-                                    "quantity",
-                                    "customer_id",
-                                    "product_id"
-                                ],
-                                "properties": {
-                                    "order_date": {
-                                        "description": "注文日",
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2023/03/07"
-                                    },
-                                    "quantity": {
-                                        "description": "注文量",
-                                        "type": "string",
-                                        "example": "20"
-                                    },
-                                    "customer_id": {
-                                        "description": "顧客ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "product_id": {
-                                        "description": "商品ID",
-                                        "type": "string",
-                                        "example": "3"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "successMessage": {
-                                            "description": "成功時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の新規登録に成功しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "バリデーションエラー発生時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "validationErrorMessage": {
-                                            "description": "バリデーションエラー時のメッセージ",
-                                            "type": "string",
-                                            "example": "数量は必須です"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "登録失敗時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "failedMessage": {
-                                            "description": "登録失敗時のメッセージ",
-                                            "type": "string",
-                                            "example": "注文の登録に失敗しました"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/products": {
             "get": {
                 "tags": [
@@ -894,95 +886,13 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/v1/product/{id}": {
-            "get": {
-                "tags": [
-                    "product"
-                ],
-                "summary": "商品IDから商品情報と在庫情報を取得する",
-                "operationId": "a480e1100e7405e8d4c4216044998e31",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "商品ID",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "examples": {
-                            "int": {
-                                "summary": "サンプルID",
-                                "value": "1"
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "成功時のレスポンス",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "description": "商品情報ID",
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "product_name": {
-                                            "description": "製品名",
-                                            "type": "string",
-                                            "example": "ブロッコリー"
-                                        },
-                                        "product_origin": {
-                                            "description": "生産地",
-                                            "type": "string",
-                                            "example": "北海道"
-                                        },
-                                        "category_id": {
-                                            "description": "カテゴリーID",
-                                            "type": "string",
-                                            "example": "1"
-                                        },
-                                        "price": {
-                                            "description": "価格",
-                                            "type": "string",
-                                            "example": "100"
-                                        },
-                                        "created_at": {
-                                            "description": "作成日時",
-                                            "type": "string",
-                                            "example": "2023-02-23T10:33:28.000000Z"
-                                        },
-                                        "updated_at": {
-                                            "description": "更新日時",
-                                            "type": "string",
-                                            "example": "2023-02-23T10:33:28.000000Z"
-                                        },
-                                        "quantity": {
-                                            "description": "在庫量",
-                                            "type": "string",
-                                            "example": "20"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/products": {
+            },
             "put": {
                 "tags": [
                     "product"
                 ],
                 "summary": "商品情報を更新する",
-                "operationId": "19e9fc4bacd37eb1a3c54f0462345943",
+                "operationId": "d77a2e47ab1202b695c8290d92135084",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1092,7 +1002,7 @@
                     "product"
                 ],
                 "summary": "商品情報を新規登録する",
-                "operationId": "f79470c2afbdb583882235160180a63d",
+                "operationId": "c9df39b9cfca42d94d6e6f7fdeb2f8d8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1196,32 +1106,24 @@
                     "product"
                 ],
                 "summary": "商品情報を削除する",
-                "operationId": "43fa3020b3a3467ac8d21489128efdf6",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "product_name",
-                                    "product_origin",
-                                    "description",
-                                    "category_id",
-                                    "price"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "description": "商品ID",
-                                        "type": "string",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
+                "operationId": "02db736d36a70e7390b7c30920366bb5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "商品ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
                             }
                         }
                     }
-                },
+                ],
                 "responses": {
                     "201": {
                         "description": "成功時のレスポンス",
@@ -1250,6 +1152,86 @@
                                             "description": "失敗時のメッセージ",
                                             "type": "string",
                                             "example": "商品情報の削除に失敗しました"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/{id}": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "商品IDから商品情報と在庫情報を取得する",
+                "operationId": "a480e1100e7405e8d4c4216044998e31",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "商品ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "サンプルID",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "商品情報ID",
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "product_name": {
+                                            "description": "製品名",
+                                            "type": "string",
+                                            "example": "ブロッコリー"
+                                        },
+                                        "product_origin": {
+                                            "description": "生産地",
+                                            "type": "string",
+                                            "example": "北海道"
+                                        },
+                                        "category_id": {
+                                            "description": "カテゴリーID",
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "price": {
+                                            "description": "価格",
+                                            "type": "string",
+                                            "example": "100"
+                                        },
+                                        "created_at": {
+                                            "description": "作成日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "description": "更新日時",
+                                            "type": "string",
+                                            "example": "2023-02-23T10:33:28.000000Z"
+                                        },
+                                        "quantity": {
+                                            "description": "在庫量",
+                                            "type": "string",
+                                            "example": "20"
                                         }
                                     },
                                     "type": "object"
