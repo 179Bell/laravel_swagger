@@ -267,7 +267,7 @@ class OrderController extends Controller
 
     /**
      *  @OA\Delete(
-     *     path="/api/v1/orders",
+     *     path="/api/v1/orders/{id}",
      *     tags={"order"},
      *     summary="注文を削除する",
      *     @OA\Parameter(

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CustomerResource;
 use App\Http\Services\CustomerService;
-use Illuminate\Http\Request;
 use App\Http\Requests\CustomerRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;

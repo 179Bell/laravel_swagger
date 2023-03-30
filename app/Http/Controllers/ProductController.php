@@ -274,7 +274,7 @@ class ProductController extends Controller
 
     /**
      *  @OA\Delete(
-     *     path="/api/v1/products",
+     *     path="/api/v1/products/{id}",
      *     tags={"product"},
      *     summary="商品情報を削除する",
      *     @OA\Parameter(
