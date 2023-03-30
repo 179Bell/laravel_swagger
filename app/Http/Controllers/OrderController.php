@@ -270,19 +270,14 @@ class OrderController extends Controller
      *     path="/api/v1/orders",
      *     tags={"order"},
      *     summary="注文を削除する",
-     *     @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(
-     *              type="object",
-     *              required={"id"},
-     *                   @OA\Property(
-     *                      property="id",
-     *                      type="string",
-     *                      description="注文ID",
-     *                      example="1",
-     *                     )
-     *            )
-     *     ),
+     *     @OA\Parameter(
+     *         description="注文ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="サンプルID"),
+     *      ),
      *     @OA\Response(
      *          response="201",
      *          description="成功時のレスポンス",

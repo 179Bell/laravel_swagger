@@ -277,19 +277,14 @@ class ProductController extends Controller
      *     path="/api/v1/products",
      *     tags={"product"},
      *     summary="商品情報を削除する",
-     *     @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(
-     *              type="object",
-     *              required={"id","product_name","product_origin","description","category_id","price"},
-     *                   @OA\Property(
-     *                      property="id",
-     *                      type="string",
-     *                      description="商品ID",
-     *                      example="1",
-     *                     ),
-     *            )
-     *     ),
+     *     @OA\Parameter(
+     *         description="商品ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="サンプルID"),
+     *      ),
      *     @OA\Response(
      *          response="201",
      *          description="成功時のレスポンス",

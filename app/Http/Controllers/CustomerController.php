@@ -252,19 +252,14 @@ class CustomerController extends Controller
      *     path="/api/v1/customers/{id}",
      *     tags={"customer"},
      *     summary="顧客情報を削除する",
-     *     @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(
-     *              type="object",
-     *              required={"id"},
-     *                   @OA\Property(
-     *                      property="id",
-     *                      type="string",
-     *                      description="顧客ID",
-     *                      example="1",
-     *                     ),
-     *            )
-     *     ),
+     *     @OA\Parameter(
+     *         description="顧客ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="サンプルID"),
+     *      ),
      *     @OA\Response(
      *          response="201",
      *          description="成功時のレスポンス",
