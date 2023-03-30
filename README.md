@@ -1,16 +1,22 @@
 ## このリポジトリについて
-架空のサービスの顧客・商品管理サービスのAPIサーバーを想定して作成。
-商品情報、注文情報、顧客情報のCRUD処理が可能
-また、Commandクラスを活用して在庫情報をCSV出力するバッチ処理を実装。
+API開発を学ぶために架空のサービスにおける商品・顧客情報の管理を目的としたRESTful APIを作成しました。
+またCommandクラスを使って在庫情報をCSVで出力するためのバッチ処理も実装しております。
+
+<br>
+
 ## SwaggerHub URL
 https://app.swaggerhub.com/apis/SHINGOMSDF/swagger-laravel/1.0.0#/
 
+<br>
+
 ## 使用したライブラリ
-l5-swagger
-Laravel-enum
+* l5-swagger
+* Laravel-enum
+
+<br>
 
 ## 開発環境・ツール
-PHP 8.0.27
-Laravel 9.52.0
-Postman
-GitHub
+* PHP 8.0.27
+* Laravel 9.52.0
+* Postman
+* GitHub
